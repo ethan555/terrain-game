@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8k133bralrsw"]
+
+[ext_resource type="PackedScene" uid="uid://clfiyqkditp61" path="res://Terrain/terrain.tscn" id="1_ilss8"]
+[ext_resource type="PackedScene" uid="uid://dyepygl8poe00" path="res://Units/unit.tscn" id="1_it635"]
+[ext_resource type="PackedScene" uid="uid://lkjk0j866lfj" path="res://Control/camera.tscn" id="2_xcmds"]
+
+[node name="Level" type="Node2D"]
+
+[node name="Camera" parent="." instance=ExtResource("2_xcmds")]
+
+[node name="Terrain" parent="." instance=ExtResource("1_ilss8")]
+
+[node name="Unit" parent="." instance=ExtResource("1_it635")]
+position = Vector2(62, 72)

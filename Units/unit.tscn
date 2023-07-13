@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dyepygl8poe00"]
+
+[ext_resource type="Texture2D" uid="uid://8x65l7nwj2pi" path="res://Assets/Units/levtank/levtank_body.png" id="1_ar1p7"]
+[ext_resource type="Script" path="res://Units/unit.gd" id="1_tqjln"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_03q4q"]
+radius = 8.0
+
+[node name="Unit" type="CharacterBody2D"]
+script = ExtResource("1_tqjln")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ar1p7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_03q4q")
