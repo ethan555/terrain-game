@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://clfiyqkditp61"]
+[gd_scene load_steps=11 format=3 uid="uid://clfiyqkditp61"]
 
 [ext_resource type="Texture2D" uid="uid://c57bhlileknnj" path="res://Assets/Terrains/test4.png" id="1_f0qhg"]
 [ext_resource type="Shader" path="res://Terrain/terrain.gdshader" id="1_fwohg"]
 [ext_resource type="Script" path="res://Terrain/terrain.gd" id="3_cen7o"]
+[ext_resource type="SystemFont" uid="uid://b2s55y78f8077" path="res://Terrain/terrain.tres" id="4_78p02"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4dkp0"]
 
@@ -10,14 +11,44 @@
 shader = ExtResource("1_fwohg")
 shader_parameter/color1 = Color(0.333333, 0, 1, 1)
 shader_parameter/color2 = Color(0, 0.916667, 1, 1)
+shader_parameter/colorScan = Color(1, 1, 1, 0.5)
+shader_parameter/scanWidth = 10.0
+shader_parameter/destinations = null
+
+[sub_resource type="LabelSettings" id="LabelSettings_l4uhg"]
+font = ExtResource("4_78p02")
+font_size = 4
+
+[sub_resource type="Gradient" id="Gradient_nn3er"]
+colors = PackedColorArray(1, 1, 1, 0.588235, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_pnwd7"]
+gradient = SubResource("Gradient_nn3er")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kasxo"]
+emission_shape = 4
+emission_point_count = 1
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 16.0
+scale_max = 16.0
+color = Color(1, 1, 1, 0.541176)
+color_ramp = SubResource("GradientTexture1D_pnwd7")
 
 [node name="Terrain" type="Area2D"]
+collision_layer = 8388608
+collision_mask = 8388608
 script = ExtResource("3_cen7o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_4dkp0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+show_behind_parent = true
 material = SubResource("ShaderMaterial_e40js")
 scale = Vector2(16, 16)
 texture = ExtResource("1_f0qhg")
@@ -28,3 +59,15 @@ offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 1
 color = Color(1, 1, 1, 0.196078)
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+label_settings = SubResource("LabelSettings_l4uhg")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 100000
+process_material = SubResource("ParticleProcessMaterial_kasxo")
+one_shot = true
+visibility_rect = Rect2(0, 0, 4096, 4096)

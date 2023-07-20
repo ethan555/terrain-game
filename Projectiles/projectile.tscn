@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhuqvmhiax2yl"]
+
+[ext_resource type="Texture2D" uid="uid://xmsf7064odei" path="res://Assets/Projectiles/Bullet.png" id="1_aug0e"]
+[ext_resource type="Script" path="res://Projectiles/projectile.gd" id="1_gjdeh"]
+[ext_resource type="PackedScene" uid="uid://bm6g6pduhak8q" path="res://Units/Hitbox.tscn" id="1_qi8ll"]
+
+[node name="Projectile" type="Node2D"]
+script = ExtResource("1_gjdeh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_aug0e")
+
+[node name="Hitbox" parent="." instance=ExtResource("1_qi8ll")]
+
+[node name="Timer" type="Timer" parent="."]

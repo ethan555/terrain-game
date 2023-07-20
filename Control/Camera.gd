@@ -1,3 +1,4 @@
+class_name Camera
 extends Camera2D
 const Utils = preload("../Utils/utils.gd")
 

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://di62n3hfpq5ya"]
+
+[ext_resource type="PackedScene" uid="uid://dc88vw2h1s01t" path="res://Units/unit.tscn" id="1_7jt5f"]
+
+[node name="Levtank" instance=ExtResource("1_7jt5f")]
+
+[node name="Stats" parent="." index="2"]
+MAX_HEALTH = null

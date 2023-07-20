@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://clwa3r8h47l5k"]
+
+[ext_resource type="PackedScene" uid="uid://bhuqvmhiax2yl" path="res://Projectiles/projectile.tscn" id="1_fpsnk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_42l7q"]
+radius = 8.0
+
+[node name="Bullet" instance=ExtResource("1_fpsnk")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource("CircleShape2D_42l7q")
