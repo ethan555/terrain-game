@@ -1,6 +1,6 @@
 class_name Unit
 extends CharacterBody2D
-const Utils = preload("../Utils/utils.gd")
+const Utils = preload("res://Utils/utils.gd")
 
 signal projectile_created(Projectile)
 
@@ -8,25 +8,31 @@ signal projectile_created(Projectile)
 @onready var terrain = get_node("../Terrain")
 
 @onready var sprite : Sprite2D = get_node("Sprite2D")
-@onready var stats := $Stats
 @onready var collider : CollisionShape2D = get_node("CollisionShape2D")
 @onready var collision_radius : float = collider.shape.radius
 
 @onready var hurtbox := $Hurtbox
 @onready var vision := $Vision
+@onready var primary_timer : Timer = $PrimaryTimer
 
+@export var faction : Faction
+@export var stats : Stats
 @export var collision_moving_scale : float = .5
 @export var move_speed : float = 300
 @export var lax : float = 1.0
 @export var rotation_speed : float = 3 * PI
+
 @export var mobile : bool = false
+@export var ground : bool = true
+
 @export var vision_radius : float = 140
 @export var primary := preload("res://Projectiles/bullet.tscn")
-@export var faction : Faction
+@export var primary_time : float = 1
 
 var target_angle = (-Vector2.UP).angle()
 
 var target : Unit
+var primary_ready = true
 
 
 func _ready():
@@ -34,15 +40,27 @@ func _ready():
     vision.enemy_in_range.connect(_on_enemy_in_range)
     vision.enemy_left_range.connect(_on_enemy_left_range)
 
+    primary_timer.connect("timeout", _on_primary_timeout)
+
+    stats.connect("death", _on_death)
+
+func _on_death() -> void:
+    print("I DIED")
+    queue_free()
+
 func _on_enemy_in_range(unit: Unit) -> void:
     if is_instance_valid(target):
         return
-    print(faction.faction_name + " " + unit.faction.faction_name)
     if faction.check_enemy(unit.faction.faction_name):
         print("ENEMY IN RANGE")
         target = unit
     else:
         print("FRIENDLIES OVER HERE")
+
+func _on_primary_timeout():
+    if not verify_target():
+        return
+    primary_ready = true
 
 func _on_enemy_left_range(unit: Unit) -> void:
     if unit == target:
@@ -55,14 +73,29 @@ func reset_target() -> void:
 func get_target_distance() -> float:
     return (target.global_position - global_position).length()
 
-func ai_target() -> void:
+func verify_target() -> bool:
     if target == null:
-        return
+        return false
     if !is_instance_valid(target):
         print("LOST HIM " + str(get_target_distance()) + " > " + str(vision_radius))
         reset_target()
+        return false
+    return true
+
+func ai_target() -> void:
+    if not verify_target():
         return
     # Shoot at target
+    if not primary_ready:
+        return
+    print("FIRING")
+    shoot(primary)
+    primary_ready = false
+    primary_timer.start(primary_time)
+    # if primary_timer.time_left > 0:
+    #     return
+    # shoot(primary)
+    # primary_timer.start(primary_time)
 
 
 func _process(_delta):
@@ -104,12 +137,19 @@ func _physics_process(_delta):
     update_velocity(_delta)
     move_and_slide()
 
+# func init_projectile(projectile):
+#     print("INITIALIZING PROJECTILE")
+#     projectile.target_faction = target.faction
+#     projectile.target = target
+#     projectile.set_as_toplevel()
+
 func shoot(projectile: PackedScene) -> void:
     var projectile_instance := projectile.instantiate()
-    projectile_instance.global_position = global_position
-    projectile_instance.rotation = sprite.rotation
-    emit_signal("projectile_created", projectile_instance)
-    projectile_instance.faction = faction
-    projectile_instance.target = target
-    projectile_instance.set_as_toplevel()
-
+    var tdir = (target.global_position - global_position).angle()
+    projectile_instance.initialize(global_position, tdir, target, target.faction, target.global_position)
+    # projectile_instance.connect("ready", init_projectile)
+    # projectile_instance.global_position = global_position
+    # projectile_instance.rotation = sprite.rotation
+    # emit_signal("projectile_created", projectile_instance)
+    add_child(projectile_instance)
+    # projectile_instance.

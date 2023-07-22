@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://dc88vw2h1s01t"]
+[gd_scene load_steps=8 format=3 uid="uid://dc88vw2h1s01t"]
 
 [ext_resource type="Texture2D" uid="uid://8x65l7nwj2pi" path="res://Assets/Units/levtank/levtank_body.png" id="1_ar1p7"]
 [ext_resource type="Script" path="res://Units/unit.gd" id="1_tqjln"]
-[ext_resource type="PackedScene" path="res://Units/Stats.tscn" id="3_debcc"]
 [ext_resource type="PackedScene" uid="uid://b811i4lglnecn" path="res://Units/Hurtbox.tscn" id="5_30kro"]
 [ext_resource type="PackedScene" uid="uid://bt8jhym3n4ary" path="res://Units/Vision.tscn" id="5_ep67k"]
 
@@ -24,10 +23,7 @@ texture = ExtResource("1_ar1p7")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_03q4q")
 
-[node name="Stats" parent="." instance=ExtResource("3_debcc")]
-
-[node name="Hurtbox" parent="." node_paths=PackedStringArray("unit") instance=ExtResource("5_30kro")]
-unit = NodePath("..")
+[node name="Hurtbox" parent="." instance=ExtResource("5_30kro")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("CircleShape2D_aygxl")
@@ -35,8 +31,9 @@ shape = SubResource("CircleShape2D_aygxl")
 [node name="Vision" parent="." instance=ExtResource("5_ep67k")]
 collision_layer = 0
 collision_mask = 2
-input_pickable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Vision"]
 shape = SubResource("CircleShape2D_83e80")
 debug_color = Color(0, 0.6, 0.701961, 0.0392157)
+
+[node name="PrimaryTimer" type="Timer" parent="."]

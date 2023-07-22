@@ -17,8 +17,12 @@ func update_vision_radius(new_radius) -> void:
     radius = new_radius
     collision_shape.shape.radius = radius
 
-func _on_area_entered(hurtbox: Hurtbox) -> void:
-    enemy_in_range.emit(hurtbox.unit)
+func _on_area_entered(area: Area2D) -> void: #hurtbox: Hurtbox) -> void:
+    if not area is Hurtbox:
+        return
+    enemy_in_range.emit(area.owner)
 
-func _on_area_exited(hurtbox: Hurtbox) -> void:
-    enemy_left_range.emit(hurtbox.unit)
+func _on_area_exited(area: Area2D) -> void: #hurtbox: Hurtbox) -> void:
+    if not area is Hurtbox:
+        return
+    enemy_left_range.emit(area.owner)

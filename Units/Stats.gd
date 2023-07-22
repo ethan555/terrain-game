@@ -1,9 +1,8 @@
-extends Node2D
+extends Resource
 
 class_name Stats
 
 @export var MAX_HEALTH := 10.0
-@export var faction : Faction
 
 signal death
 
@@ -13,7 +12,7 @@ func _ready():
     health = MAX_HEALTH
 
 func damage(attack : Attack):
-    health -= attack.damage
+    health -= attack.get_damage()
 
     if health <= 0:
         death.emit()

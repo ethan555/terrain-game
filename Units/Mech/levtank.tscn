@@ -1,8 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://di62n3hfpq5ya"]
+[gd_scene load_steps=4 format=3 uid="uid://di62n3hfpq5ya"]
 
 [ext_resource type="PackedScene" uid="uid://dc88vw2h1s01t" path="res://Units/unit.tscn" id="1_7jt5f"]
+[ext_resource type="Script" path="res://Units/Stats.gd" id="2_hcfp8"]
+
+[sub_resource type="Resource" id="Resource_hwgvr"]
+resource_local_to_scene = true
+script = ExtResource("2_hcfp8")
+MAX_HEALTH = 10.0
 
 [node name="Levtank" instance=ExtResource("1_7jt5f")]
-
-[node name="Stats" parent="." index="2"]
-MAX_HEALTH = null
+stats = SubResource("Resource_hwgvr")
