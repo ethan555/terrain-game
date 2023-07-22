@@ -13,6 +13,11 @@ func _ready():
     area_entered.connect(_on_area_entered)
     area_exited.connect(_on_area_exited)
 
+# GET OVERLAPPING AREAS
+func get_new_areas() -> Array[Area2D]:
+    var areas := get_overlapping_areas()
+    return areas
+
 func update_vision_radius(new_radius) -> void:
     radius = new_radius
     collision_shape.shape.radius = radius

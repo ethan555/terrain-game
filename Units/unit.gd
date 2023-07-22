@@ -49,7 +49,7 @@ func _on_death() -> void:
     queue_free()
 
 func _on_enemy_in_range(unit: Unit) -> void:
-    if is_instance_valid(target):
+    if verify_target(false):
         return
     if faction.check_enemy(unit.faction.faction_name):
         print("ENEMY IN RANGE")
@@ -58,32 +58,45 @@ func _on_enemy_in_range(unit: Unit) -> void:
         print("FRIENDLIES OVER HERE")
 
 func _on_primary_timeout():
-    if not verify_target():
+    if not verify_target(true):
         return
     primary_ready = true
 
 func _on_enemy_left_range(unit: Unit) -> void:
     if unit == target:
         print("HE GOT AWAY")
-        reset_target()
+        reset_target(true)
 
-func reset_target() -> void:
+func reset_target(get_new: bool) -> bool:
     target = null
+    if not get_new:
+        return false
+    var potential_target_areas : Array[Area2D] = vision.get_new_areas()
+    if potential_target_areas.size() < 1:
+        return false
+    for area in potential_target_areas:
+        if not area is Hurtbox:
+            continue
+        var unit = area.owner
+        if faction.check_enemy(unit.faction.faction_name):
+            print("ENEMY IN RANGE")
+            target = unit
+            return true
+    return false
 
 func get_target_distance() -> float:
     return (target.global_position - global_position).length()
 
-func verify_target() -> bool:
+func verify_target(get_new_if_false: bool) -> bool:
     if target == null:
         return false
     if !is_instance_valid(target):
         print("LOST HIM " + str(get_target_distance()) + " > " + str(vision_radius))
-        reset_target()
-        return false
+        return reset_target(get_new_if_false)
     return true
 
 func ai_target() -> void:
-    if not verify_target():
+    if not verify_target(true):
         return
     # Shoot at target
     if not primary_ready:
@@ -124,7 +137,7 @@ func set_moving(is_moving: bool) -> void:
         collider.shape.radius = collision_radius
 
 func update_velocity(delta) -> void:
-    if not mobile and is_instance_valid(target):
+    if not mobile and verify_target(true):
         return set_moving(false)
 
     var destination_distance = terrain.get_unit_destination_distance(0, position)
