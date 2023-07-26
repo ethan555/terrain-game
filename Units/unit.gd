@@ -15,6 +15,7 @@ signal projectile_created(Projectile)
 @onready var vision := $Vision
 @onready var primary_timer : Timer = $PrimaryTimer
 
+@export_category("Stats")
 @export var faction : Faction
 @export var stats : Stats
 @export var collision_moving_scale : float = .5

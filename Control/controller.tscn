@@ -20,3 +20,5 @@ allies = Array[String]([])
 [node name="Controller" type="Node2D"]
 script = ExtResource("1_vcb48")
 factions = Array[ExtResource("2_0u1ju")]([SubResource("Resource_j0yei"), SubResource("Resource_tbi2a")])
+
+[node name="Timer" type="Timer" parent="."]
