@@ -10,13 +10,13 @@ extends Node2D
 @onready var hitbox := $Hitbox
 @onready var timer := $Timer
 
-var target: Unit
+var target: Node2D
 var target_location: Vector2
 var target_faction: Faction
 
 var velocity := Vector2(0, 0)
 
-func initialize(_position: Vector2, _rotation: float, _target: Unit, _target_faction: Faction, _target_location: Vector2):
+func initialize(_position: Vector2, _rotation: float, _target: Node2D, _target_faction: Faction, _target_location: Vector2):
     global_position = _position
     rotation = _rotation
     target = _target

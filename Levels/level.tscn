@@ -1,11 +1,14 @@
-[gd_scene load_steps=20 format=3 uid="uid://c8k133bralrsw"]
+[gd_scene load_steps=23 format=3 uid="uid://c8k133bralrsw"]
 
 [ext_resource type="PackedScene" uid="uid://clfiyqkditp61" path="res://Terrain/terrain.tscn" id="1_ilss8"]
-[ext_resource type="PackedScene" uid="uid://lkjk0j866lfj" path="res://Control/camera.tscn" id="2_xcmds"]
+[ext_resource type="PackedScene" uid="uid://lkjk0j866lfj" path="res://Control/Camera.tscn" id="2_xcmds"]
+[ext_resource type="PackedScene" uid="uid://bjf0ml2drx2ye" path="res://Control/Controller.tscn" id="3_km70m"]
+[ext_resource type="PackedScene" uid="uid://bjvh7sb02ldwp" path="res://Control/UI.tscn" id="3_lsrbq"]
 [ext_resource type="Script" path="res://Units/Faction.gd" id="4_6bcgg"]
 [ext_resource type="PackedScene" uid="uid://di62n3hfpq5ya" path="res://Units/Mech/levtank.tscn" id="4_6ybn6"]
 [ext_resource type="PackedScene" uid="uid://bllpl8v71bihn" path="res://Control/wall.tscn" id="4_oe0rq"]
 [ext_resource type="Script" path="res://Units/Stats.gd" id="5_pgtef"]
+[ext_resource type="PackedScene" uid="uid://ctnx3asmiv0xs" path="res://Buildings/Mech/factory.tscn" id="9_gi1d6"]
 
 [sub_resource type="Resource" id="Resource_fya7a"]
 script = ExtResource("4_6bcgg")
@@ -14,42 +17,42 @@ faction_name = "DIS"
 color = Color(0, 0.717647, 1, 1)
 allies = Array[String]([])
 
-[sub_resource type="Resource" id="Resource_o5cvp"]
+[sub_resource type="Resource" id="Resource_gmpj1"]
 resource_local_to_scene = true
 script = ExtResource("5_pgtef")
 MAX_HEALTH = 10.0
 
-[sub_resource type="Resource" id="Resource_ycibt"]
+[sub_resource type="Resource" id="Resource_xte23"]
 resource_local_to_scene = true
 script = ExtResource("5_pgtef")
 MAX_HEALTH = 10.0
 
-[sub_resource type="Resource" id="Resource_f8gtj"]
+[sub_resource type="Resource" id="Resource_2eppw"]
 resource_local_to_scene = true
 script = ExtResource("5_pgtef")
 MAX_HEALTH = 10.0
 
-[sub_resource type="Resource" id="Resource_jlwrc"]
+[sub_resource type="Resource" id="Resource_663pq"]
 resource_local_to_scene = true
 script = ExtResource("5_pgtef")
 MAX_HEALTH = 10.0
 
-[sub_resource type="Resource" id="Resource_xjgnn"]
+[sub_resource type="Resource" id="Resource_hoaw5"]
 resource_local_to_scene = true
 script = ExtResource("5_pgtef")
 MAX_HEALTH = 10.0
 
-[sub_resource type="Resource" id="Resource_w7ksx"]
+[sub_resource type="Resource" id="Resource_7mmft"]
 resource_local_to_scene = true
 script = ExtResource("5_pgtef")
 MAX_HEALTH = 10.0
 
-[sub_resource type="Resource" id="Resource_qcmhb"]
+[sub_resource type="Resource" id="Resource_owhoo"]
 resource_local_to_scene = true
 script = ExtResource("5_pgtef")
 MAX_HEALTH = 10.0
 
-[sub_resource type="Resource" id="Resource_kssox"]
+[sub_resource type="Resource" id="Resource_vnjay"]
 resource_local_to_scene = true
 script = ExtResource("5_pgtef")
 MAX_HEALTH = 10.0
@@ -61,17 +64,17 @@ faction_name = "Abyss"
 color = Color(1, 1, 1, 1)
 allies = Array[String]([])
 
-[sub_resource type="Resource" id="Resource_1yewj"]
+[sub_resource type="Resource" id="Resource_b5647"]
 resource_local_to_scene = true
 script = ExtResource("5_pgtef")
 MAX_HEALTH = 10.0
 
-[sub_resource type="Resource" id="Resource_nl742"]
+[sub_resource type="Resource" id="Resource_qdhuv"]
 resource_local_to_scene = true
 script = ExtResource("5_pgtef")
 MAX_HEALTH = 10.0
 
-[sub_resource type="Resource" id="Resource_dv4o4"]
+[sub_resource type="Resource" id="Resource_maeia"]
 resource_local_to_scene = true
 script = ExtResource("5_pgtef")
 MAX_HEALTH = 10.0
@@ -81,6 +84,10 @@ MAX_HEALTH = 10.0
 [node name="Camera" parent="." instance=ExtResource("2_xcmds")]
 
 [node name="Terrain" parent="." instance=ExtResource("1_ilss8")]
+
+[node name="UI" parent="." instance=ExtResource("3_lsrbq")]
+
+[node name="Controller" parent="." instance=ExtResource("3_km70m")]
 
 [node name="Wall" parent="." instance=ExtResource("4_oe0rq")]
 position = Vector2(-10, 2048)
@@ -101,54 +108,58 @@ scale = Vector2(4136, 20)
 [node name="Levtank" parent="." instance=ExtResource("4_6ybn6")]
 position = Vector2(104, 89)
 faction = SubResource("Resource_fya7a")
-stats = SubResource("Resource_o5cvp")
+stats = SubResource("Resource_gmpj1")
 
 [node name="Levtank2" parent="." instance=ExtResource("4_6ybn6")]
 position = Vector2(119, 90)
 faction = SubResource("Resource_fya7a")
-stats = SubResource("Resource_ycibt")
+stats = SubResource("Resource_xte23")
 
 [node name="Levtank3" parent="." instance=ExtResource("4_6ybn6")]
 position = Vector2(119, 104)
 faction = SubResource("Resource_fya7a")
-stats = SubResource("Resource_f8gtj")
+stats = SubResource("Resource_2eppw")
 
 [node name="Levtank4" parent="." instance=ExtResource("4_6ybn6")]
 position = Vector2(104, 103)
 faction = SubResource("Resource_fya7a")
-stats = SubResource("Resource_jlwrc")
+stats = SubResource("Resource_663pq")
 
 [node name="Levtank5" parent="." instance=ExtResource("4_6ybn6")]
 position = Vector2(136, 91)
 faction = SubResource("Resource_fya7a")
-stats = SubResource("Resource_xjgnn")
+stats = SubResource("Resource_hoaw5")
 
 [node name="Levtank6" parent="." instance=ExtResource("4_6ybn6")]
 position = Vector2(136, 102)
 faction = SubResource("Resource_fya7a")
-stats = SubResource("Resource_w7ksx")
+stats = SubResource("Resource_7mmft")
 
 [node name="Levtank7" parent="." instance=ExtResource("4_6ybn6")]
 position = Vector2(152, 92)
 faction = SubResource("Resource_fya7a")
-stats = SubResource("Resource_qcmhb")
+stats = SubResource("Resource_owhoo")
 
 [node name="Levtank8" parent="." instance=ExtResource("4_6ybn6")]
 position = Vector2(151, 104)
 faction = SubResource("Resource_fya7a")
-stats = SubResource("Resource_kssox")
+stats = SubResource("Resource_vnjay")
 
 [node name="Levtank9" parent="." instance=ExtResource("4_6ybn6")]
 position = Vector2(648, 160)
 faction = SubResource("Resource_w5f52")
-stats = SubResource("Resource_1yewj")
+stats = SubResource("Resource_b5647")
 
 [node name="Levtank10" parent="." instance=ExtResource("4_6ybn6")]
 position = Vector2(357, 381)
 faction = SubResource("Resource_w5f52")
-stats = SubResource("Resource_nl742")
+stats = SubResource("Resource_qdhuv")
 
 [node name="Levtank11" parent="." instance=ExtResource("4_6ybn6")]
 position = Vector2(586, 309)
 faction = SubResource("Resource_w5f52")
-stats = SubResource("Resource_dv4o4")
+stats = SubResource("Resource_maeia")
+
+[node name="Factory" parent="." instance=ExtResource("9_gi1d6")]
+position = Vector2(388, 72)
+faction = SubResource("Resource_fya7a")

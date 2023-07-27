@@ -1,6 +1,6 @@
 class_name Terrain
 extends Area2D
-const Array2D = preload("../Utils/Array2D.gd")
+const Array2D = preload("res://Utils/Array2D.gd")
 const font : Font = preload("terrain.tres")
 
 @onready var sprite : Sprite2D = get_node("Sprite2D")
@@ -9,7 +9,7 @@ const font : Font = preload("terrain.tres")
 @onready var selection_rectangle : ColorRect = get_node("ColorRect")
 @onready var particles : GPUParticles2D = get_node("GPUParticles2D")
 
-@onready var camera = get_node("../Camera")
+@onready var camera = get_node("/root/Level/Camera")
 
 @export var height_min : float = 0
 @export var height_max : float = 100
@@ -17,7 +17,6 @@ const font : Font = preload("terrain.tres")
 @export var selection_color : Color = Color(1, 1, 1, .25)
 @export var selected_width : float = 1
 
-var zero : Vector2 = Vector2(0, 0)
 var bounds : Vector2
 var inner_bounds : Vector2
 var map : Map
@@ -27,7 +26,7 @@ class Cell:
     var id : int = 0
     var height : float = 0
     var cost : float = 0
-    var direction : Vector2 = Vector2(0, 0)
+    var direction : Vector2 = Vector2.ZERO
 
     func _init(_position : Vector2i, _size : Vector2i, _height : float):
         position = _position
@@ -127,7 +126,7 @@ class Map:
             return
         var destination = get_cell(selected_position)
         destinations[id] = destination
-        destination.direction = Vector2(0, 0)
+        destination.direction = Vector2.ZERO
         if id not in cell_queues:
             cell_queues[id] = []
         cell_queues[id].clear()
@@ -165,7 +164,7 @@ class Map:
                 return false
             var current_cell : Cell = cell_queue.pop_front()
             # var cell_position_world = get_cell_position_world(current_cell)
-            # particles.emit_particle(Transform2D(cell_position_world, cell_position_world, cell_position_world), Vector2(0, 0), Color(), Color(), 1)
+            # particles.emit_particle(Transform2D(cell_position_world, cell_position_world, cell_position_world), Vector2.ZERO, Color(), Color(), 1)
             # var neighbors = get_neighbors(current_cell)
             for n in neighbor_array:
                 var neighbor_pos = current_cell.position + n
@@ -185,13 +184,14 @@ class Map:
                     cell_queue.push_back(neighbor)
                     visited[neighbor.id] = true
 
-            var destination_distance = abs(destination.position.x - current_cell.position.x) #(destination.position - current_cell.position).length()
+            var destination_distance = max(abs(destination.position.x - current_cell.position.x), abs(destination.position.y - current_cell.position.y)) #(destination.position - current_cell.position).length()
             var max_distance = max_distances[id]
             max_distances[id] = max(max_distance, destination_distance)
             # current_cell.direction = current_cell.direction.normalized()
         cell_queue.clear()
         visited.clear()
-        # max_distances[id] = 0
+        max_distances[id] = size.x * size.y
+        print(max_distances[id])
         print(operations)
         return true
 
@@ -222,6 +222,7 @@ class Map:
                     sprite.material.set_shader_parameter("destinations", destinations_uniform)
                     should_redraw = true
                 else:
+                    should_redraw = true
                     destinations_uniform[id] = Vector3(destination_pos.x, destination_pos.y, 0)
                     sprite.material.set_shader_parameter("destinations", destinations_uniform)
         return should_redraw
@@ -267,7 +268,7 @@ func _input_event(_viewport, _event, _shape_idx):
         on_click()
 
 func _process(_delta):
-    var mouse_pos = get_local_mouse_position().clamp(zero, inner_bounds)
+    var mouse_pos = get_local_mouse_position().clamp(Vector2.ZERO, inner_bounds)
     var mouse_pos_scaled = map.scale_position(mouse_pos)
     var pos_min : Vector2 = mouse_pos_scaled * map.scale
     var pos_max = pos_min + Vector2(1, 1) * map.scale

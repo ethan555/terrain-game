@@ -1,3 +1,15 @@
-[gd_scene format=3 uid="uid://bjvh7sb02ldwp"]
+[gd_scene load_steps=3 format=3 uid="uid://bjvh7sb02ldwp"]
+
+[ext_resource type="SystemFont" uid="uid://b2s55y78f8077" path="res://Terrain/terrain.tres" id="1_d4nmv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_h5ti1"]
+font = ExtResource("1_d4nmv")
+font_size = 24
 
 [node name="UI" type="CanvasLayer"]
+
+[node name="ControlTimer" type="Label" parent="."]
+offset_right = 27.0
+offset_bottom = 39.0
+text = "0"
+label_settings = SubResource("LabelSettings_h5ti1")

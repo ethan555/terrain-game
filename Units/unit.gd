@@ -4,8 +4,9 @@ const Utils = preload("res://Utils/utils.gd")
 
 signal projectile_created(Projectile)
 
-@onready var camera = get_node("../Camera")
-@onready var terrain = get_node("../Terrain")
+@onready var camera := get_node("/root/Level/Camera")
+@onready var terrain := get_node("/root/Level/Terrain")
+@onready var controller := get_node("/root/Level/Controller")
 
 @onready var sprite : Sprite2D = get_node("Sprite2D")
 @onready var collider : CollisionShape2D = get_node("CollisionShape2D")
@@ -32,7 +33,7 @@ signal projectile_created(Projectile)
 
 var target_angle = (-Vector2.UP).angle()
 
-var target : Unit
+var target : Node2D
 var primary_ready = true
 
 
@@ -49,7 +50,7 @@ func _on_death() -> void:
     print("I DIED")
     queue_free()
 
-func _on_enemy_in_range(unit: Unit) -> void:
+func _on_enemy_in_range(unit: Node2D) -> void:
     if verify_target(false):
         return
     if faction.check_enemy(unit.faction.faction_name):
@@ -63,7 +64,7 @@ func _on_primary_timeout():
         return
     primary_ready = true
 
-func _on_enemy_left_range(unit: Unit) -> void:
+func _on_enemy_left_range(unit: Node2D) -> void:
     if unit == target:
         print("HE GOT AWAY")
         reset_target(true)
@@ -73,7 +74,7 @@ func reset_target(get_new: bool) -> bool:
     if not get_new:
         return false
     var potential_target_areas : Array[Area2D] = vision.get_new_areas()
-    if potential_target_areas.size() < 1:
+    if len(potential_target_areas) < 1:
         return false
     for area in potential_target_areas:
         if not area is Hurtbox:
@@ -114,6 +115,10 @@ func ai_target() -> void:
 
 func _process(_delta):
     sprite.scale = Vector2(1.0, 1.0) * max(1.0, 1.0 / camera.zoom.x)
+
+    # Only move and target during play state
+    if controller.current_state != controller.State.Play:
+        return
     ai_target()
 
 func get_move(delta):
@@ -125,7 +130,8 @@ func get_move(delta):
         # var angle_to = sprite.transform.x.angle_to(input_direction)
         # var angle_rotate = input_direction.angle_to( sprite.rotation
         target_angle = input_direction.angle()
-        sprite.rotation = Utils.approach_angle(sprite.rotation, target_angle, rotation_speed * delta)
+        rotation = Utils.approach_angle(rotation, target_angle, rotation_speed * delta)
+        # sprite.rotation = Utils.approach_angle(sprite.rotation, target_angle, rotation_speed * delta)
     # else:
         # collider.shape.radius = collision_radius
     set_moving(speed > 0)
@@ -148,6 +154,10 @@ func update_velocity(delta) -> void:
     get_move(delta)
 
 func _physics_process(_delta):
+    # Only move and target during play state
+    if controller.current_state != controller.State.Play:
+        velocity = Vector2.ZERO
+        return
     update_velocity(_delta)
     move_and_slide()
 

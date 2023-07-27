@@ -1,6 +1,6 @@
 class_name Camera
 extends Camera2D
-const Utils = preload("../Utils/utils.gd")
+const Utils = preload("res://Utils/utils.gd")
 
 @export var move_speed : float = 750
 @export var zoom_min : float = .5

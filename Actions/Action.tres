@@ -1,3 +1,12 @@
-[gd_resource type="Resource" format=3 uid="uid://c27jt6xbgudbp"]
+[gd_resource type="Resource" script_class="Action" load_steps=2 format=3 uid="uid://c27jt6xbgudbp"]
+
+[ext_resource type="Script" path="res://Actions/Action.gd" id="1_1ki1p"]
 
 [resource]
+script = ExtResource("1_1ki1p")
+name = ""
+description = ""
+cost = 0
+recharge_time = 1.0
+recharge_on_round = 0.0
+action_effects = Array[Resource("res://Actions/ActionEffect.gd")]([])

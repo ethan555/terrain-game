@@ -1,3 +1,7 @@
-[gd_resource type="Resource" format=3 uid="uid://cvxpgovdv0qoq"]
+[gd_resource type="Resource" script_class="ActionEffect" load_steps=2 format=3 uid="uid://cvxpgovdv0qoq"]
+
+[ext_resource type="Script" path="res://Actions/ActionEffect.gd" id="1_8tfkw"]
 
 [resource]
+script = ExtResource("1_8tfkw")
+effect_type = 0
