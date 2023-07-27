@@ -1,10 +1,10 @@
 class_name Building
 extends Node2D
 
+@onready var stats : Stats = $Stats
 @onready var controller := get_node("/root/Level/Controller")
 
 @export var faction : Faction
-@export var stats : Stats
 @export var actions : Array[Action]
 @export var passive_actions : Array[Action]
 

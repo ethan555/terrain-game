@@ -12,13 +12,13 @@ signal projectile_created(Projectile)
 @onready var collider : CollisionShape2D = get_node("CollisionShape2D")
 @onready var collision_radius : float = collider.shape.radius
 
+@onready var stats : Stats = $Stats
 @onready var hurtbox := $Hurtbox
 @onready var vision := $Vision
 @onready var primary_timer : Timer = $PrimaryTimer
 
 @export_category("Stats")
 @export var faction : Faction
-@export var stats : Stats
 @export var collision_moving_scale : float = .5
 @export var move_speed : float = 300
 @export var lax : float = 1.0

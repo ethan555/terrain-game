@@ -1,4 +1,4 @@
-extends Resource
+extends Node
 
 class_name Stats
 
@@ -12,6 +12,7 @@ func _ready():
     health = MAX_HEALTH
 
 func damage(attack : Attack):
+    print("TAKING DAMAGE! HEALTH:" + str(health) + " DAMAGE: " + str(attack.get_damage()))
     health -= attack.get_damage()
 
     if health <= 0:
