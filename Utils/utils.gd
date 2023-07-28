@@ -14,7 +14,6 @@ static func approach(a, b, rate) -> float:
     var dsign = sign(b - a)
     var result = a + rate * dsign
     var dsign_result = sign(result)
-    print(str(result) + " " + str(dsign) + " " + str(dsign_result))
     if dsign != dsign_result:
         return b
     return result

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c8k133bralrsw"]
+[gd_scene load_steps=12 format=3 uid="uid://c8k133bralrsw"]
 
 [ext_resource type="PackedScene" uid="uid://clfiyqkditp61" path="res://Terrain/terrain.tscn" id="1_ilss8"]
 [ext_resource type="PackedScene" uid="uid://lkjk0j866lfj" path="res://Control/Camera.tscn" id="2_xcmds"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://di62n3hfpq5ya" path="res://Units/Mech/levtank.tscn" id="4_6ybn6"]
 [ext_resource type="PackedScene" uid="uid://bllpl8v71bihn" path="res://Control/wall.tscn" id="4_oe0rq"]
 [ext_resource type="PackedScene" uid="uid://ctnx3asmiv0xs" path="res://Buildings/Mech/factory.tscn" id="9_gi1d6"]
+[ext_resource type="PackedScene" uid="uid://bblffax8bb1uc" path="res://Units/Mech/infantry.tscn" id="9_x37bf"]
 
 [sub_resource type="Resource" id="Resource_fya7a"]
 script = ExtResource("4_6bcgg")
@@ -96,3 +97,67 @@ faction = SubResource("Resource_w5f52")
 [node name="Factory" parent="." instance=ExtResource("9_gi1d6")]
 position = Vector2(388, 72)
 faction = SubResource("Resource_fya7a")
+
+[node name="Infantry" parent="." instance=ExtResource("9_x37bf")]
+position = Vector2(1373, 570)
+faction = SubResource("Resource_w5f52")
+
+[node name="Infantry2" parent="." instance=ExtResource("9_x37bf")]
+position = Vector2(1293, 646)
+faction = SubResource("Resource_w5f52")
+
+[node name="Infantry3" parent="." instance=ExtResource("9_x37bf")]
+position = Vector2(1358, 591)
+faction = SubResource("Resource_w5f52")
+
+[node name="Infantry4" parent="." instance=ExtResource("9_x37bf")]
+position = Vector2(1278, 667)
+faction = SubResource("Resource_w5f52")
+
+[node name="Infantry5" parent="." instance=ExtResource("9_x37bf")]
+position = Vector2(1359, 557)
+faction = SubResource("Resource_w5f52")
+
+[node name="Infantry6" parent="." instance=ExtResource("9_x37bf")]
+position = Vector2(1279, 633)
+faction = SubResource("Resource_w5f52")
+
+[node name="Infantry7" parent="." instance=ExtResource("9_x37bf")]
+position = Vector2(1344, 578)
+faction = SubResource("Resource_w5f52")
+
+[node name="Infantry8" parent="." instance=ExtResource("9_x37bf")]
+position = Vector2(1264, 654)
+faction = SubResource("Resource_w5f52")
+
+[node name="Infantry9" parent="." instance=ExtResource("9_x37bf")]
+position = Vector2(1391, 566)
+faction = SubResource("Resource_w5f52")
+
+[node name="Infantry10" parent="." instance=ExtResource("9_x37bf")]
+position = Vector2(1311, 642)
+faction = SubResource("Resource_w5f52")
+
+[node name="Infantry11" parent="." instance=ExtResource("9_x37bf")]
+position = Vector2(1376, 587)
+faction = SubResource("Resource_w5f52")
+
+[node name="Infantry12" parent="." instance=ExtResource("9_x37bf")]
+position = Vector2(1296, 663)
+faction = SubResource("Resource_w5f52")
+
+[node name="Infantry13" parent="." instance=ExtResource("9_x37bf")]
+position = Vector2(1377, 553)
+faction = SubResource("Resource_w5f52")
+
+[node name="Infantry14" parent="." instance=ExtResource("9_x37bf")]
+position = Vector2(1297, 629)
+faction = SubResource("Resource_w5f52")
+
+[node name="Infantry15" parent="." instance=ExtResource("9_x37bf")]
+position = Vector2(1362, 574)
+faction = SubResource("Resource_w5f52")
+
+[node name="Infantry16" parent="." instance=ExtResource("9_x37bf")]
+position = Vector2(1282, 650)
+faction = SubResource("Resource_w5f52")

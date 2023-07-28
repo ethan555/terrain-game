@@ -121,7 +121,6 @@ class Map:
 
     func set_destination(id, position, particles):
         var selected_position = scale_position(position)
-        print("Selected position: " + str(selected_position))
         if not check_cell(selected_position):
             return
         var destination = get_cell(selected_position)
@@ -191,8 +190,6 @@ class Map:
         cell_queue.clear()
         visited.clear()
         max_distances[id] = size.x * size.y
-        print(max_distances[id])
-        print(operations)
         return true
 
     func process(particles : GPUParticles2D, sprite : Sprite2D, delta):
@@ -305,20 +302,22 @@ func get_unit_destination(id):
     var destination = map.get_destination(id)
     return destination
 
-func get_unit_move(unit_position : Vector2):
+func get_unit_move(unit_position : Vector2, faction: Faction):
+    if faction.id != 0:
+        return Vector2.ZERO
     var scaled_position = map.world_to_map(unit_position)
     var unit_cell : Cell = map.get_cell(scaled_position)
     return unit_cell.direction
 
 
 func _draw():
-    print("WOW")
-    var line_length = (float(map.scale)) / 2
-    for r in range(map.size.x):
-        for c in range(map.size.y):
-            var cell = map.get_cell(Vector2i(r, c))
-            # if cell.cost == 0:
-            #     continue
-            var cell_position = map.get_cell_position_world(cell)
-            draw_line(cell_position, cell_position + cell.direction * line_length, debug_color, 1.0)
+    pass
+    # var line_length = (float(map.scale)) / 2
+    # for r in range(map.size.x):
+    #     for c in range(map.size.y):
+    #         var cell = map.get_cell(Vector2i(r, c))
+    #         # if cell.cost == 0:
+    #         #     continue
+    #         var cell_position = map.get_cell_position_world(cell)
+    #         draw_line(cell_position, cell_position + cell.direction * line_length, debug_color, 1.0)
             # draw_string(font, cell_position, str(round(cell.cost)))

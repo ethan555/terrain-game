@@ -1,42 +1,23 @@
-[gd_scene load_steps=9 format=3 uid="uid://dc88vw2h1s01t"]
+[gd_scene load_steps=6 format=3 uid="uid://dc88vw2h1s01t"]
 
-[ext_resource type="Texture2D" uid="uid://8x65l7nwj2pi" path="res://Assets/Units/levtank/levtank_body.png" id="1_ar1p7"]
 [ext_resource type="Script" path="res://Units/unit.gd" id="1_tqjln"]
+[ext_resource type="Texture2D" uid="uid://dedlg4gomgelg" path="res://Assets/Units/infantry/infantry_body.png" id="2_5tmj6"]
 [ext_resource type="PackedScene" uid="uid://c8edx4pvxnycy" path="res://Units/Stats.tscn" id="3_6f5mt"]
 [ext_resource type="PackedScene" uid="uid://b811i4lglnecn" path="res://Units/Hurtbox.tscn" id="5_30kro"]
 [ext_resource type="PackedScene" uid="uid://bt8jhym3n4ary" path="res://Units/Vision.tscn" id="5_ep67k"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_03q4q"]
-radius = 5.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_aygxl"]
-radius = 6.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_83e80"]
-radius = 100.0
 
 [node name="Unit" type="CharacterBody2D"]
 script = ExtResource("1_tqjln")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_ar1p7")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_03q4q")
+texture = ExtResource("2_5tmj6")
 
 [node name="Stats" parent="." instance=ExtResource("3_6f5mt")]
 
 [node name="Hurtbox" parent="." instance=ExtResource("5_30kro")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-shape = SubResource("CircleShape2D_aygxl")
-
 [node name="Vision" parent="." instance=ExtResource("5_ep67k")]
 collision_layer = 0
 collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Vision"]
-shape = SubResource("CircleShape2D_83e80")
-debug_color = Color(0, 0.6, 0.701961, 0.0392157)
 
 [node name="PrimaryTimer" type="Timer" parent="."]

@@ -50,7 +50,6 @@ func _ready():
         velocity = speed * tdir
 
 func hit_target() -> void:
-    print("WE GOT HIM")
     if is_instance_valid(target):
         target.stats.damage(attack)
     queue_free()
@@ -77,5 +76,4 @@ func _physics_process(_delta):
     position += velocity * _delta
 
 func _on_impact(_body: Node) -> void:
-    print("IMPACT")
     pass

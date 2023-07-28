@@ -47,17 +47,15 @@ func _ready():
     stats.connect("death", _on_death)
 
 func _on_death() -> void:
-    print("I DIED")
     queue_free()
 
 func _on_enemy_in_range(unit: Node2D) -> void:
     if verify_target(false):
         return
     if faction.check_enemy(unit.faction.faction_name):
-        print("ENEMY IN RANGE")
         target = unit
-    else:
-        print("FRIENDLIES OVER HERE")
+    # else:
+    #     print("FRIENDLIES OVER HERE")
 
 func _on_primary_timeout():
     if not verify_target(true):
@@ -66,7 +64,6 @@ func _on_primary_timeout():
 
 func _on_enemy_left_range(unit: Node2D) -> void:
     if unit == target:
-        print("HE GOT AWAY")
         reset_target(true)
 
 func reset_target(get_new: bool) -> bool:
@@ -81,7 +78,6 @@ func reset_target(get_new: bool) -> bool:
             continue
         var unit = area.owner
         if faction.check_enemy(unit.faction.faction_name):
-            print("ENEMY IN RANGE")
             target = unit
             return true
     return false
@@ -93,7 +89,6 @@ func verify_target(get_new_if_false: bool) -> bool:
     if target == null:
         return false
     if !is_instance_valid(target):
-        print("LOST HIM " + str(get_target_distance()) + " > " + str(vision_radius))
         return reset_target(get_new_if_false)
     return true
 
@@ -103,7 +98,6 @@ func ai_target() -> void:
     # Shoot at target
     if not primary_ready:
         return
-    print("FIRING")
     shoot(primary)
     primary_ready = false
     primary_timer.start(primary_time)
@@ -122,7 +116,7 @@ func _process(_delta):
     ai_target()
 
 func get_move(delta):
-    var input_direction : Vector2 = terrain.get_unit_move(position)
+    var input_direction : Vector2 = terrain.get_unit_move(position, faction)
     velocity = move_speed * input_direction
     var speed = velocity.length()
     if speed > 0:

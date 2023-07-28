@@ -1,13 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://ctnx3asmiv0xs"]
+[gd_scene load_steps=5 format=3 uid="uid://ctnx3asmiv0xs"]
 
 [ext_resource type="PackedScene" uid="uid://baaccbp77y6p8" path="res://Buildings/building.tscn" id="1_2ywug"]
+[ext_resource type="PackedScene" uid="uid://bblffax8bb1uc" path="res://Units/Mech/infantry.tscn" id="2_cnf40"]
 [ext_resource type="PackedScene" uid="uid://di62n3hfpq5ya" path="res://Units/Mech/levtank.tscn" id="3_dj51t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s23ht"]
 size = Vector2(32, 32)
 
 [node name="Factory" instance=ExtResource("1_2ywug")]
-spawnable_units = Array[PackedScene]([ExtResource("3_dj51t")])
+spawnable_units = Array[PackedScene]([ExtResource("2_cnf40"), ExtResource("3_dj51t")])
 
 [node name="Stats" parent="." index="1"]
 MAX_HEALTH = 100.0

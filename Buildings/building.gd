@@ -21,7 +21,6 @@ func _ready():
     controller.next_round_signal.connect(_on_next_round_signal)
 
 func spawn_units():
-    print("Spawning Units")
     for i in range(len(spawning_units)):
         var unit_number = spawning_units[i]
         if unit_number < 1:
@@ -60,5 +59,4 @@ func _input(event):
 
 
 func _on_death() -> void:
-    print("BUILDING DOWN")
     queue_free()

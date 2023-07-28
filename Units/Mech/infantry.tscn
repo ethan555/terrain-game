@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://bblffax8bb1uc"]
+
+[ext_resource type="PackedScene" uid="uid://dc88vw2h1s01t" path="res://Units/unit.tscn" id="1_87dye"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g8gjg"]
+radius = 2.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c484b"]
+radius = 3.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1eg3w"]
+radius = 140.0
+
+[node name="Infantry" instance=ExtResource("1_87dye")]
+move_speed = 50.0
+primary_time = 0.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_g8gjg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource("CircleShape2D_c484b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Vision" index="0"]
+shape = SubResource("CircleShape2D_1eg3w")
+debug_color = Color(0, 0.6, 0.701961, 0.0196078)
