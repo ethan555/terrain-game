@@ -4,6 +4,7 @@ const Utils = preload("res://Utils/utils.gd")
 
 signal projectile_created(Projectile)
 
+@onready var spawn_node := get_node("/root/Level")
 @onready var camera := get_node("/root/Level/Camera")
 @onready var terrain := get_node("/root/Level/Terrain")
 @onready var controller := get_node("/root/Level/Controller")
@@ -21,6 +22,8 @@ signal projectile_created(Projectile)
 @export var faction : Faction
 @export var collision_moving_scale : float = .5
 @export var move_speed : float = 300
+@export var acceleration : float = 100
+@export var push : float = 10
 @export var lax : float = 1.0
 @export var rotation_speed : float = 3 * PI
 
@@ -76,7 +79,7 @@ func reset_target(get_new: bool) -> bool:
     for area in potential_target_areas:
         if not area is Hurtbox:
             continue
-        var unit = area.owner
+        var unit = area.get_parent()
         if faction.check_enemy(unit.faction.faction_name):
             target = unit
             return true
@@ -111,13 +114,16 @@ func _process(_delta):
     sprite.scale = Vector2(1.0, 1.0) * max(1.0, 1.0 / camera.zoom.x)
 
     # Only move and target during play state
-    if controller.current_state != controller.State.Play:
+    var play_paused = controller.current_state != controller.State.Play
+    primary_timer.paused = play_paused
+    if play_paused:
         return
     ai_target()
 
 func get_move(delta):
     var input_direction : Vector2 = terrain.get_unit_move(position, faction)
-    velocity = move_speed * input_direction
+    var new_velocity = move_speed * input_direction
+    velocity = Utils.approach_vector(velocity, new_velocity, acceleration)
     var speed = velocity.length()
     if speed > 0:
 
@@ -150,9 +156,17 @@ func update_velocity(delta) -> void:
 func _physics_process(_delta):
     # Only move and target during play state
     if controller.current_state != controller.State.Play:
-        velocity = Vector2.ZERO
         return
     update_velocity(_delta)
+    # var collision := move_and_collide(velocity * _delta)
+    # if collision:
+    #     var collision_vector : Vector2 = collision.get_collider().global_position - global_position
+    #     var collision_distance : float = max(collision_vector.length(), .1)
+    #     var push_acceleration = push / pow(collision_distance, 2)
+    #     var push_force = collision.get_normal().normalized() * push_acceleration
+    #     print("V: " + str(velocity) + " Pushing: " + str(push_force) + " New: " + str(velocity + push_force))
+    #     velocity += push_force
+
     move_and_slide()
 
 # func init_projectile(projectile):
@@ -164,10 +178,10 @@ func _physics_process(_delta):
 func shoot(projectile: PackedScene) -> void:
     var projectile_instance := projectile.instantiate()
     var tdir = (target.global_position - global_position).angle()
-    projectile_instance.initialize(global_position, tdir, target, target.faction, target.global_position)
+    projectile_instance.initialize(global_position, tdir, target, faction, target.global_position)
     # projectile_instance.connect("ready", init_projectile)
     # projectile_instance.global_position = global_position
     # projectile_instance.rotation = sprite.rotation
     # emit_signal("projectile_created", projectile_instance)
-    add_child(projectile_instance)
+    spawn_node.add_child(projectile_instance)
     # projectile_instance.

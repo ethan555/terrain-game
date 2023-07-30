@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgfhu5vq33rm3"]
+
+[ext_resource type="Script" path="res://Projectiles/explosion.gd" id="1_27ntr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d6qrn"]
+resource_local_to_scene = true
+
+[node name="Explosion" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+input_pickable = false
+monitorable = false
+script = ExtResource("1_27ntr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_d6qrn")
+debug_color = Color(0.996078, 0, 0.188235, 0.117647)
+
+[node name="Timer" type="Timer" parent="."]

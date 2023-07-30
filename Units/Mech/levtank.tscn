@@ -8,18 +8,18 @@
 radius = 4.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i8bbo"]
+resource_local_to_scene = true
 radius = 6.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1hjxl"]
+resource_local_to_scene = true
 radius = 140.0
 
 [node name="Levtank" instance=ExtResource("1_7jt5f")]
+move_speed = 160.0
 primary = ExtResource("2_yn6ow")
 
-[node name="Sprite2D" parent="." index="0"]
-texture = ExtResource("3_7jqtc")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 shape = SubResource("CircleShape2D_pe7bw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" index="0"]
@@ -28,3 +28,9 @@ shape = SubResource("CircleShape2D_i8bbo")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Vision" index="0"]
 shape = SubResource("CircleShape2D_1hjxl")
 debug_color = Color(0, 0.6, 0.701961, 0.0196078)
+
+[node name="Sprite2D" parent="." index="3"]
+texture = ExtResource("3_7jqtc")
+
+[node name="Stats" parent="." index="4"]
+MAX_HEALTH = 100.0

@@ -1,6 +1,7 @@
 class_name Building
 extends Node2D
 
+@onready var spawn_node := get_node("/root/Level")
 @onready var stats : Stats = $Stats
 @onready var controller := get_node("/root/Level/Controller")
 
@@ -35,7 +36,7 @@ func spawn_unit(unit: PackedScene, total: int, index: int) -> void:
     inst.faction = faction
     inst.set_as_top_level(true)
     inst.global_position = global_position + Vector2.from_angle(tdir)
-    add_child(inst)
+    spawn_node.add_child(inst)
 
 func _on_next_round_signal():
     spawn_units()

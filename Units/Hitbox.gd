@@ -5,3 +5,7 @@ extends Area2D
 
 func set_disabled(is_disabled: bool):
     collision_shape.set_deferred("disabled", is_disabled)
+
+func get_new_areas() -> Array[Area2D]:
+    var areas := get_overlapping_areas()
+    return areas

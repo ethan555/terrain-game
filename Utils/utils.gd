@@ -18,6 +18,14 @@ static func approach(a, b, rate) -> float:
         return b
     return result
 
+static func approach_vector(a: Vector2, b: Vector2, rate: float) -> Vector2:
+    var diff := b - a
+    if diff.length() <= rate:
+        return b
+    var norm := diff.normalized()
+    var result := a + norm * rate
+    return result
+
 static func angle_difference(a, b) -> float:
     var MAX_ANGLE = PI * 2
     var diff = fmod(b - a, MAX_ANGLE)

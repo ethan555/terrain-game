@@ -11,8 +11,8 @@ var health : float
 func _ready():
     health = MAX_HEALTH
 
-func damage(attack : Attack):
-    health -= attack.get_damage()
+func damage(attack : Attack, delta := 1.0):
+    health -= attack.get_damage() * delta
 
     if health <= 0:
         death.emit()
