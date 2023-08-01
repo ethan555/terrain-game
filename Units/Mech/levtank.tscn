@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://di62n3hfpq5ya"]
+[gd_scene load_steps=7 format=3 uid="uid://dl7w4uuif7bsv"]
 
 [ext_resource type="PackedScene" uid="uid://dc88vw2h1s01t" path="res://Units/unit.tscn" id="1_7jt5f"]
-[ext_resource type="PackedScene" uid="uid://bi53gs4igb74m" path="res://Projectiles/shell.tscn" id="2_yn6ow"]
+[ext_resource type="PackedScene" uid="uid://bi53gs4igb74m" path="res://Projectiles/burst.tscn" id="2_7l3fm"]
 [ext_resource type="Texture2D" uid="uid://8x65l7nwj2pi" path="res://Assets/Units/levtank/levtank_body.png" id="3_7jqtc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pe7bw"]
@@ -17,7 +17,7 @@ radius = 140.0
 
 [node name="Levtank" instance=ExtResource("1_7jt5f")]
 move_speed = 160.0
-primary = ExtResource("2_yn6ow")
+primary = ExtResource("2_7l3fm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 shape = SubResource("CircleShape2D_pe7bw")

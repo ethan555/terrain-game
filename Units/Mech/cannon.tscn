@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://va1d0lu63qbu"]
+
+[ext_resource type="PackedScene" uid="uid://dc88vw2h1s01t" path="res://Units/unit.tscn" id="1_nvnev"]
+[ext_resource type="Texture2D" uid="uid://b1iyucpgugrr2" path="res://Assets/Units/cannon/cannon_body.png" id="2_eeg4v"]
+[ext_resource type="PackedScene" uid="uid://b46eu6r5wyd2u" path="res://Projectiles/rocket.tscn" id="2_nhcw1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g8gjg"]
+resource_local_to_scene = true
+radius = 2.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c484b"]
+resource_local_to_scene = true
+radius = 3.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1eg3w"]
+resource_local_to_scene = true
+radius = 140.0
+
+[node name="Cannon" instance=ExtResource("1_nvnev")]
+move_speed = 50.0
+primary = ExtResource("2_nhcw1")
+primary_time = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_g8gjg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource("CircleShape2D_c484b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Vision" index="0"]
+shape = SubResource("CircleShape2D_1eg3w")
+debug_color = Color(0, 0.6, 0.701961, 0.0196078)
+
+[node name="Sprite2D" parent="." index="3"]
+texture = ExtResource("2_eeg4v")
+
+[node name="Stats" parent="." index="4"]
+MAX_HEALTH = 20.0

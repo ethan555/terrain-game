@@ -75,7 +75,6 @@ func create_explosion(explosion_position: Vector2):
 
 func hit_target() -> void:
     if attack.radius > 0:
-        print("Creating Explosion")
         create_explosion(target_location)
         # Damage radius, create explosion
         # hitbox.

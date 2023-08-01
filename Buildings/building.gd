@@ -35,7 +35,7 @@ func spawn_unit(unit: PackedScene, total: int, index: int) -> void:
     inst.rotation = tdir
     inst.faction = faction
     inst.set_as_top_level(true)
-    inst.global_position = global_position + Vector2.from_angle(tdir)
+    inst.global_position = global_position + Vector2.from_angle(tdir) * total
     spawn_node.add_child(inst)
 
 func _on_next_round_signal():
@@ -55,6 +55,10 @@ func _input(event):
         add_spawning_unit(2)
     if event.is_action_pressed("spawn_unit_3"):
         add_spawning_unit(3)
+    if event.is_action_pressed("spawn_unit_4"):
+        add_spawning_unit(4)
+    if event.is_action_pressed("spawn_unit_5"):
+        add_spawning_unit(5)
 
 # func _process(delta):
 

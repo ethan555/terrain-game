@@ -1,6 +1,8 @@
 class_name Vision
 extends Area2D
 
+const Utils = preload("res://Utils/utils.gd")
+
 @onready var collision_shape := $CollisionShape2D
 
 var radius : float
@@ -15,7 +17,7 @@ func _ready():
 
 # GET OVERLAPPING AREAS
 func get_new_areas() -> Array[Area2D]:
-    var areas := get_overlapping_areas()
+    var areas := Utils.get_overlapping_areas_godot_sucks(self, collision_shape)
     return areas
 
 func update_vision_radius(new_radius) -> void:

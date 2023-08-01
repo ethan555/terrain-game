@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://bwe0xla2snj4f"]
+
+[ext_resource type="PackedScene" uid="uid://dc88vw2h1s01t" path="res://Units/unit.tscn" id="1_tqlwo"]
+[ext_resource type="PackedScene" uid="uid://yr3a3a23o2ip" path="res://Projectiles/shell.tscn" id="2_xnv58"]
+[ext_resource type="Texture2D" uid="uid://dfmkk5126307s" path="res://Assets/Units/railgunner/railgunner_body.png" id="3_mu73a"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g8gjg"]
+resource_local_to_scene = true
+radius = 2.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c484b"]
+resource_local_to_scene = true
+radius = 3.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1eg3w"]
+resource_local_to_scene = true
+radius = 300.0
+
+[node name="Railgunner" instance=ExtResource("1_tqlwo")]
+move_speed = 50.0
+vision_radius = 300.0
+primary = ExtResource("2_xnv58")
+primary_time = 3.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_g8gjg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource("CircleShape2D_c484b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Vision" index="0"]
+shape = SubResource("CircleShape2D_1eg3w")
+debug_color = Color(0, 0.6, 0.701961, 0.0196078)
+
+[node name="Sprite2D" parent="." index="3"]
+texture = ExtResource("3_mu73a")

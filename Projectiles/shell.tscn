@@ -1,21 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://bi53gs4igb74m"]
+[gd_scene load_steps=5 format=3 uid="uid://yr3a3a23o2ip"]
 
 [ext_resource type="PackedScene" uid="uid://bhuqvmhiax2yl" path="res://Projectiles/projectile.tscn" id="1_y2sla"]
 [ext_resource type="Script" path="res://Units/Attack.gd" id="2_f8plh"]
 
-[sub_resource type="Resource" id="Resource_sopjt"]
-resource_local_to_scene = true
+[sub_resource type="Resource" id="Resource_o0446"]
 script = ExtResource("2_f8plh")
-damage = 50.0
-radius = 50.0
+damage = 120.0
+radius = 0.0
 multiplier = 1.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_2vo33"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_bdak0"]
 resource_local_to_scene = true
 radius = 8.0
 
 [node name="Shell" instance=ExtResource("1_y2sla")]
-attack = SubResource("Resource_sopjt")
+scale = Vector2(2, 1)
+speed = 1000.0
+attack = SubResource("Resource_o0446")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0"]
-shape = SubResource("CircleShape2D_2vo33")
+shape = SubResource("CircleShape2D_bdak0")

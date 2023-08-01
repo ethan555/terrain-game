@@ -1,14 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://c8k133bralrsw"]
+[gd_scene load_steps=14 format=3 uid="uid://c8k133bralrsw"]
 
 [ext_resource type="PackedScene" uid="uid://clfiyqkditp61" path="res://Terrain/terrain.tscn" id="1_ilss8"]
 [ext_resource type="PackedScene" uid="uid://lkjk0j866lfj" path="res://Control/Camera.tscn" id="2_xcmds"]
 [ext_resource type="PackedScene" uid="uid://bjf0ml2drx2ye" path="res://Control/Controller.tscn" id="3_km70m"]
 [ext_resource type="PackedScene" uid="uid://bjvh7sb02ldwp" path="res://Control/UI.tscn" id="3_lsrbq"]
 [ext_resource type="Script" path="res://Units/Faction.gd" id="4_6bcgg"]
-[ext_resource type="PackedScene" uid="uid://di62n3hfpq5ya" path="res://Units/Mech/levtank.tscn" id="4_6ybn6"]
+[ext_resource type="PackedScene" uid="uid://dl7w4uuif7bsv" path="res://Units/Mech/levtank.tscn" id="4_6ybn6"]
 [ext_resource type="PackedScene" uid="uid://bllpl8v71bihn" path="res://Control/wall.tscn" id="4_oe0rq"]
 [ext_resource type="PackedScene" uid="uid://ctnx3asmiv0xs" path="res://Buildings/Mech/factory.tscn" id="9_gi1d6"]
 [ext_resource type="PackedScene" uid="uid://bblffax8bb1uc" path="res://Units/Mech/infantry.tscn" id="9_x37bf"]
+[ext_resource type="PackedScene" uid="uid://va1d0lu63qbu" path="res://Units/Mech/cannon.tscn" id="10_ahnt5"]
+[ext_resource type="PackedScene" uid="uid://bwe0xla2snj4f" path="res://Units/Mech/railgunner.tscn" id="11_cmdd2"]
 
 [sub_resource type="Resource" id="Resource_fya7a"]
 script = ExtResource("4_6bcgg")
@@ -160,4 +162,24 @@ faction = SubResource("Resource_w5f52")
 
 [node name="Infantry16" parent="." instance=ExtResource("9_x37bf")]
 position = Vector2(1282, 650)
+faction = SubResource("Resource_w5f52")
+
+[node name="Cannon" parent="." instance=ExtResource("10_ahnt5")]
+position = Vector2(1261, 674)
+faction = SubResource("Resource_w5f52")
+
+[node name="Cannon2" parent="." instance=ExtResource("10_ahnt5")]
+position = Vector2(1333, 607)
+faction = SubResource("Resource_w5f52")
+
+[node name="Cannon3" parent="." instance=ExtResource("10_ahnt5")]
+position = Vector2(1398, 544)
+faction = SubResource("Resource_w5f52")
+
+[node name="Railgunner" parent="." instance=ExtResource("11_cmdd2")]
+position = Vector2(1283, 711)
+faction = SubResource("Resource_w5f52")
+
+[node name="Railgunner2" parent="." instance=ExtResource("11_cmdd2")]
+position = Vector2(1436, 567)
 faction = SubResource("Resource_w5f52")

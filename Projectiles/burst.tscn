@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://bi53gs4igb74m"]
+
+[ext_resource type="PackedScene" uid="uid://bhuqvmhiax2yl" path="res://Projectiles/projectile.tscn" id="1_6mb8p"]
+[ext_resource type="Script" path="res://Units/Attack.gd" id="2_206pg"]
+[ext_resource type="Texture2D" uid="uid://6hyxvub4u6y0" path="res://Assets/Projectiles/Burst.png" id="3_l8qmo"]
+
+[sub_resource type="Resource" id="Resource_sopjt"]
+resource_local_to_scene = true
+script = ExtResource("2_206pg")
+damage = 9.0
+radius = 10.0
+multiplier = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2vo33"]
+resource_local_to_scene = true
+radius = 8.0
+
+[node name="Burst" instance=ExtResource("1_6mb8p")]
+attack = SubResource("Resource_sopjt")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("3_l8qmo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource("CircleShape2D_2vo33")

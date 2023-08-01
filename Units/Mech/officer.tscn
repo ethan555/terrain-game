@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://rctg6skc0u4y"]
+
+[ext_resource type="PackedScene" uid="uid://dc88vw2h1s01t" path="res://Units/unit.tscn" id="1_gd6mp"]
+[ext_resource type="Texture2D" uid="uid://sasnloj315gu" path="res://Assets/Units/officer/officer_body.png" id="2_xfugb"]
+[ext_resource type="Script" path="res://Units/Aura.gd" id="3_vty74"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g8gjg"]
+resource_local_to_scene = true
+radius = 2.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c484b"]
+resource_local_to_scene = true
+radius = 3.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1eg3w"]
+resource_local_to_scene = true
+radius = 140.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8dr00"]
+resource_local_to_scene = true
+radius = 60.0
+
+[node name="Infantry" instance=ExtResource("1_gd6mp")]
+move_speed = 50.0
+primary_time = 0.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_g8gjg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource("CircleShape2D_c484b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Vision" index="0"]
+shape = SubResource("CircleShape2D_1eg3w")
+debug_color = Color(0, 0.6, 0.701961, 0.0196078)
+
+[node name="Sprite2D" parent="." index="3"]
+texture = ExtResource("2_xfugb")
+
+[node name="Stats" parent="." index="4"]
+MAX_HEALTH = 30.0
+
+[node name="AuraCommand" type="Area2D" parent="." index="6"]
+collision_layer = 2
+collision_mask = 2
+monitoring = false
+script = ExtResource("3_vty74")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AuraCommand" index="0"]
+shape = SubResource("CircleShape2D_8dr00")
+debug_color = Color(0.701961, 0.372549, 0, 0)

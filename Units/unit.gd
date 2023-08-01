@@ -34,7 +34,9 @@ signal projectile_created(Projectile)
 @export var primary := preload("res://Projectiles/bullet.tscn")
 @export var primary_time : float = 1
 
-var target_angle = (-Vector2.UP).angle()
+@export var statuses : Dictionary
+
+var target_angle := (-Vector2.UP).angle()
 
 var target : Node2D
 var primary_ready = true
@@ -45,12 +47,17 @@ func _ready():
     vision.enemy_in_range.connect(_on_enemy_in_range)
     vision.enemy_left_range.connect(_on_enemy_left_range)
 
+    hurtbox.aura_entered.connect(_on_aura_entered)
+
     primary_timer.connect("timeout", _on_primary_timeout)
 
     stats.connect("death", _on_death)
 
 func _on_death() -> void:
     queue_free()
+
+func _on_aura_entered(aura: Aura) -> void:
+    pass
 
 func _on_enemy_in_range(unit: Node2D) -> void:
     if verify_target(false):
@@ -61,9 +68,10 @@ func _on_enemy_in_range(unit: Node2D) -> void:
     #     print("FRIENDLIES OVER HERE")
 
 func _on_primary_timeout():
-    if not verify_target(true):
-        return
     primary_ready = true
+    # if not verify_target(true):
+    #     return
+    
 
 func _on_enemy_left_range(unit: Node2D) -> void:
     if unit == target:
@@ -74,6 +82,7 @@ func reset_target(get_new: bool) -> bool:
     if not get_new:
         return false
     var potential_target_areas : Array[Area2D] = vision.get_new_areas()
+    print("New targets: " + str(len(potential_target_areas)))
     if len(potential_target_areas) < 1:
         return false
     for area in potential_target_areas:
@@ -81,6 +90,7 @@ func reset_target(get_new: bool) -> bool:
             continue
         var unit = area.get_parent()
         if faction.check_enemy(unit.faction.faction_name):
+            print("Found new target: ")
             target = unit
             return true
     return false
@@ -98,7 +108,8 @@ func verify_target(get_new_if_false: bool) -> bool:
 func ai_target() -> void:
     if not verify_target(true):
         return
-    # Shoot at target
+    # Aim at target
+    target_angle = (target.global_position - global_position).angle()
     if not primary_ready:
         return
     shoot(primary)
@@ -118,19 +129,16 @@ func _process(_delta):
     primary_timer.paused = play_paused
     if play_paused:
         return
-    ai_target()
 
-func get_move(delta):
+func get_move(_delta):
     var input_direction : Vector2 = terrain.get_unit_move(position, faction)
     var new_velocity = move_speed * input_direction
     velocity = Utils.approach_vector(velocity, new_velocity, acceleration)
     var speed = velocity.length()
-    if speed > 0:
-
+    if speed > 0 and not verify_target(false):
         # var angle_to = sprite.transform.x.angle_to(input_direction)
         # var angle_rotate = input_direction.angle_to( sprite.rotation
         target_angle = input_direction.angle()
-        rotation = Utils.approach_angle(rotation, target_angle, rotation_speed * delta)
         # sprite.rotation = Utils.approach_angle(sprite.rotation, target_angle, rotation_speed * delta)
     # else:
         # collider.shape.radius = collision_radius
@@ -158,6 +166,8 @@ func _physics_process(_delta):
     if controller.current_state != controller.State.Play:
         return
     update_velocity(_delta)
+    ai_target()
+    rotation = Utils.approach_angle(rotation, target_angle, rotation_speed * _delta)
     # var collision := move_and_collide(velocity * _delta)
     # if collision:
     #     var collision_vector : Vector2 = collision.get_collider().global_position - global_position
