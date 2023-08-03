@@ -33,6 +33,7 @@ signal projectile_created(Projectile)
 @export var vision_radius : float = 140
 @export var primary := preload("res://Projectiles/bullet.tscn")
 @export var primary_time : float = 1
+@export var primary_offset : Vector2 = Vector2(0, 0)
 
 @export var statuses : Dictionary
 
@@ -60,7 +61,7 @@ func _on_aura_entered(aura: Aura) -> void:
     pass
 
 func _on_enemy_in_range(unit: Node2D) -> void:
-    if verify_target(false):
+    if verify_target(true):
         return
     if faction.check_enemy(unit.faction.faction_name):
         target = unit
@@ -105,12 +106,12 @@ func verify_target(get_new_if_false: bool) -> bool:
         return reset_target(get_new_if_false)
     return true
 
-func ai_target() -> void:
+func ai_target(delta) -> void:
     if not verify_target(true):
         return
     # Aim at target
     target_angle = (target.global_position - global_position).angle()
-    if not primary_ready:
+    if not primary_ready or Utils.angle_distance(rotation, target_angle) > rotation_speed * delta:
         return
     shoot(primary)
     primary_ready = false
@@ -135,7 +136,7 @@ func get_move(_delta):
     var new_velocity = move_speed * input_direction
     velocity = Utils.approach_vector(velocity, new_velocity, acceleration)
     var speed = velocity.length()
-    if speed > 0 and not verify_target(false):
+    if speed > 0 and not verify_target(true):
         # var angle_to = sprite.transform.x.angle_to(input_direction)
         # var angle_rotate = input_direction.angle_to( sprite.rotation
         target_angle = input_direction.angle()
@@ -166,7 +167,7 @@ func _physics_process(_delta):
     if controller.current_state != controller.State.Play:
         return
     update_velocity(_delta)
-    ai_target()
+    ai_target(_delta)
     rotation = Utils.approach_angle(rotation, target_angle, rotation_speed * _delta)
     # var collision := move_and_collide(velocity * _delta)
     # if collision:
@@ -188,7 +189,15 @@ func _physics_process(_delta):
 func shoot(projectile: PackedScene) -> void:
     var projectile_instance := projectile.instantiate()
     var tdir = (target.global_position - global_position).angle()
-    projectile_instance.initialize(global_position, tdir, target, faction, target.global_position)
+    var projectile_sprite = projectile_instance.get_node("Sprite2D")
+    var projectile_size = projectile_sprite.texture.get_size()
+    var projectile_scale = projectile_sprite.scale.x
+    var gun_offset = primary_offset.rotated(tdir)
+    var spawn_offset = gun_offset + Vector2.from_angle(tdir) * projectile_size.x * projectile_scale / 2.0
+
+    var spawn_pos = global_position + spawn_offset
+
+    projectile_instance.initialize(spawn_pos, tdir, target, faction, target.global_position)
     # projectile_instance.connect("ready", init_projectile)
     # projectile_instance.global_position = global_position
     # projectile_instance.rotation = sprite.rotation

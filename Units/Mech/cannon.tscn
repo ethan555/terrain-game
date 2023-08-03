@@ -20,6 +20,7 @@ radius = 140.0
 move_speed = 50.0
 primary = ExtResource("2_nhcw1")
 primary_time = 2.0
+primary_offset = Vector2(2, -3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 shape = SubResource("CircleShape2D_g8gjg")

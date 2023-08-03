@@ -31,6 +31,9 @@ static func angle_difference(a, b) -> float:
     var diff = fmod(b - a, MAX_ANGLE)
     return (fmod(2 * diff, MAX_ANGLE) - diff)
 
+static func angle_distance(a, b) -> float:
+    return abs(angle_difference(a, b))
+
 static func approach_angle(a, b, rate) -> float:
     var diff = angle_difference(a, b)
     var adiff = abs(diff)

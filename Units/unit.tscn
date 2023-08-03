@@ -8,6 +8,7 @@
 
 [node name="Unit" type="CharacterBody2D"]
 script = ExtResource("1_tqjln")
+primary_offset = Vector2(2, 2)
 
 [node name="Hurtbox" parent="." instance=ExtResource("5_30kro")]
 
