@@ -22,6 +22,7 @@ var current_state = State.Building
 
 var energy := 3
 
+var selected_stack : Array[Node2D] = []
 var selected : Node2D
 signal next_round_signal
 
@@ -40,10 +41,59 @@ func round_timeout():
             next_round_signal.emit()
     timer.start(round_timeouts[current_state])
 
+func set_selected(node: Node2D, reset_on_same: bool):
+    if reset_on_same and selected == node:
+        # Reset selected
+        reset_selected()
+        return
+    selected = node
+
+func reset_selected():
+    if len(selected_stack) > 0:
+        selected = selected_stack.pop_back()
+    else:
+        if is_instance_valid(selected):
+            selected.deselect()
+        selected = null
+
+func check_selected():
+    return selected != null and is_instance_valid(selected)
+
+func is_selected(node : Node2D):
+    return selected == node
+
+func on_click(event):
+    # !!!!!!!!!!!!!!!!!!!!!! GODOT SUCKS !!!!!!!!!!!!!!!!!!!!!!!!!!
+    var query_params := PhysicsPointQueryParameters2D.new()
+    query_params.position = get_global_mouse_position()
+    query_params.collide_with_areas = true
+    query_params.collide_with_bodies = false
+    query_params.collision_mask = 0x7FFFFFFF
+
+    var results = get_world_2d().direct_space_state.intersect_point(query_params, 32) # The last 'true' enables Area2D intersections, previous four values are all defaults
+
+    var clicked_selectbox = false
+    for result in results:
+        var c = result["collider"]
+        if c is SelectBox:
+            c.on_select_click(event)
+            clicked_selectbox = true
+            break
+    if not clicked_selectbox:
+        reset_selected()
+
 func _input(event):
     if event.is_action_pressed("end_turn"):
         if current_state == State.Building:
             timer.start(0.1)
+    if event is InputEventMouseButton \
+        and event.button_index == MOUSE_BUTTON_LEFT \
+        and event.is_pressed():
+
+        on_click(event)
+
+    if is_instance_valid(selected):
+        selected._on_selected_input(event)
 
 func _process(delta):
     match (current_state):

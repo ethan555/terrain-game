@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://baaccbp77y6p8"]
+[gd_scene load_steps=6 format=3 uid="uid://baaccbp77y6p8"]
 
 [ext_resource type="Texture2D" uid="uid://jj42gpdwgqs8" path="res://icon.svg" id="1_0r0i2"]
 [ext_resource type="Script" path="res://Buildings/building.gd" id="1_oi5f8"]
 [ext_resource type="PackedScene" uid="uid://b811i4lglnecn" path="res://Units/Hurtbox.tscn" id="2_qvsgj"]
 [ext_resource type="PackedScene" uid="uid://c8edx4pvxnycy" path="res://Units/Stats.tscn" id="3_383bd"]
+[ext_resource type="PackedScene" uid="uid://bpthm1mhs4s7y" path="res://Control/SelectBox.tscn" id="5_oovge"]
 
 [node name="Building" type="Node2D"]
 script = ExtResource("1_oi5f8")
@@ -15,3 +16,5 @@ texture = ExtResource("1_0r0i2")
 [node name="Stats" parent="." instance=ExtResource("3_383bd")]
 
 [node name="Hurtbox" parent="." instance=ExtResource("2_qvsgj")]
+
+[node name="SelectBox" parent="." instance=ExtResource("5_oovge")]

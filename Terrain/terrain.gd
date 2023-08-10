@@ -10,6 +10,7 @@ const font : Font = preload("terrain.tres")
 @onready var particles : GPUParticles2D = get_node("GPUParticles2D")
 
 @onready var camera = get_node("/root/Level/Camera")
+@onready var controller := get_node("/root/Level/Controller")
 
 @export var height_min : float = 0
 @export var height_max : float = 100
@@ -80,46 +81,53 @@ class Map:
                 var position = Vector2(r, c)
                 grid.set_cell(position, cell)
 
-    func scale_position(position : Vector2):
+    ## Scale a world position to the map scale, top left of cells
+    func scale_position(position : Vector2) -> Vector2:
         return floor(position / scale)
 
-    func world_to_map(position : Vector2):
-        return floor(position / scale) + Vector2(.5, .5)
+    ## Snap a world position to the map scale grid, in world coordinates
+    func snap_world_position(position : Vector2) -> Vector2:
+        return scale_position(position) * scale
 
-    func check_cell(position : Vector2i):
+    ## Scale a world position to the map scale, centered on cells
+    func world_to_map(position : Vector2) -> Vector2:
+        return scale_position(position) + Vector2(.5, .5)
+
+    ## Check if a local position on the map is within the map bounds
+    func check_cell(position : Vector2i) -> bool:
         return position.x >= 0 \
             and position.x < size.x \
             and position.y >= 0 \
             and position.y < size.y
 
-    func get_cell(position : Vector2i):
+    func get_cell(position : Vector2i) -> Cell:
         var cell = grid.get_cell(position)
         return cell
 
-    func get_cell_position_world(cell: Cell):
+    func get_cell_position_world(cell: Cell) -> Vector2:
         var position_world = (Vector2(cell.position) + Vector2(.5, .5)) * scale
         return position_world
 
-    func get_height(position : Vector2i):
+    func get_height(position : Vector2i) -> float:
         var cell = grid.get_cell(position)
         return cell.height
 
-    func get_height_raw(position : Vector2):
+    func get_height_raw(position : Vector2) -> float:
         var position_nearest = (position / scale).floor()
         var cell = grid.get_cell(position_nearest)
         return cell.height
 
-    func get_destination(id):
+    func get_destination(id) -> Variant:
         if id not in destinations:
             return null
         return destinations[id].position
-    
-    func get_max_distance(id):
+
+    func get_max_distance(id) -> float:
         if id not in destinations:
             return 0
         return max_distances[id]
 
-    func set_destination(id, position, particles):
+    func set_destination(id, position, particles) -> void:
         var selected_position = scale_position(position)
         if not check_cell(selected_position):
             return
@@ -136,7 +144,7 @@ class Map:
         max_distances[id] = 0.0
         make_paths(id, particles)
 
-    func get_neighbors(cell : Cell):
+    func get_neighbors(cell : Cell) -> Array[Cell]:
         var neighbors = []
         for n in neighbor_array:
             var neighbor_pos = cell.position + n
@@ -146,7 +154,7 @@ class Map:
             neighbors.append(neighbor)
         return neighbors
 
-    func make_paths(id, _particles : GPUParticles2D):
+    func make_paths(id, _particles : GPUParticles2D) -> bool:
         var destination : Cell = destinations[id]
         destination.cost = 0
         var cell_queue = cell_queues[id]
@@ -192,7 +200,7 @@ class Map:
         max_distances[id] = size.x * size.y
         return true
 
-    func process(particles : GPUParticles2D, sprite : Sprite2D, delta):
+    func process(particles : GPUParticles2D, sprite : Sprite2D, delta) -> bool:
         # var should_redraw = false
         var dest_values = []
         var should_redraw = false
@@ -257,12 +265,13 @@ func _ready():
     init_map()
     init_shader()
 
-func _input_event(_viewport, _event, _shape_idx):
-    if _event is InputEventMouseButton \
-        and _event.button_index == MOUSE_BUTTON_LEFT \
-        and _event.is_pressed():
+func _input_event(_viewport, event, _shape_idx):
+    if event is InputEventMouseButton \
+        and event.button_index == MOUSE_BUTTON_RIGHT \
+        and event.is_pressed():
 
         on_click()
+        # get_tree().get_root().set_input_as_handled()
 
 func _process(_delta):
     var mouse_pos = get_local_mouse_position().clamp(Vector2.ZERO, inner_bounds)

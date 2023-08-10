@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ctnx3asmiv0xs"]
+[gd_scene load_steps=9 format=3 uid="uid://ctnx3asmiv0xs"]
 
 [ext_resource type="PackedScene" uid="uid://baaccbp77y6p8" path="res://Buildings/building.tscn" id="1_2ywug"]
 [ext_resource type="PackedScene" uid="uid://bblffax8bb1uc" path="res://Units/Mech/infantry.tscn" id="2_cnf40"]
@@ -10,6 +10,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s23ht"]
 size = Vector2(32, 32)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q2hf4"]
+size = Vector2(32, 32)
+
 [node name="Factory" instance=ExtResource("1_2ywug")]
 spawnable_units = Array[PackedScene]([ExtResource("2_cnf40"), ExtResource("3_y8kfj"), ExtResource("4_lifa2"), ExtResource("5_e7vnx"), ExtResource("3_dj51t")])
 
@@ -18,3 +21,8 @@ MAX_HEALTH = 100.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" index="0"]
 shape = SubResource("RectangleShape2D_s23ht")
+debug_color = Color(0, 0.6, 0.701961, 0.0862745)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectBox" index="1"]
+shape = SubResource("RectangleShape2D_q2hf4")
+debug_color = Color(0.505882, 0.580392, 0, 0.0588235)

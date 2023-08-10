@@ -8,7 +8,7 @@
 resource_local_to_scene = true
 script = ExtResource("2_vwn1k")
 damage = 18.0
-radius = 20.0
+radius = 30.0
 multiplier = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d3y5r"]

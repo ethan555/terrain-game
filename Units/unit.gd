@@ -6,7 +6,7 @@ signal projectile_created(Projectile)
 
 @onready var spawn_node := get_node("/root/Level")
 @onready var camera := get_node("/root/Level/Camera")
-@onready var terrain := get_node("/root/Level/Terrain")
+@onready var terrain : Terrain = get_node("/root/Level/Terrain")
 @onready var controller := get_node("/root/Level/Controller")
 
 @onready var sprite : Sprite2D = get_node("Sprite2D")

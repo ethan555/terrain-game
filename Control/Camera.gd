@@ -3,7 +3,8 @@ extends Camera2D
 const Utils = preload("res://Utils/utils.gd")
 
 @export var move_speed : float = 750
-@export var zoom_min : float = .5
+@export var zoom_default : float = 1
+@export var zoom_min : float = .25
 @export var zoom_max : float = 4
 @export var zoom_rate : float = 2
 @export var zoom_lerp_rate : float = .05
@@ -13,7 +14,7 @@ const Utils = preload("res://Utils/utils.gd")
 var min_position : Vector2 = Vector2(0,0)
 var max_position : Vector2 = Vector2(1,1)
 
-var target_zoom = zoom_min
+var target_zoom = zoom_default
 
 func _input(event):
     if event.is_action_pressed("zoom_out"):

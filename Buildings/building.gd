@@ -5,6 +5,8 @@ extends Node2D
 @onready var stats : Stats = $Stats
 @onready var controller := get_node("/root/Level/Controller")
 
+@onready var select_box : SelectBox = $SelectBox
+
 @export var faction : Faction
 @export var actions : Array[Action]
 @export var passive_actions : Array[Action]
@@ -18,6 +20,8 @@ func _ready():
     spawning_units.fill(0)
 
     stats.connect("death", _on_death)
+
+    select_box.connect("select_click", _on_select_click)
 
     controller.next_round_signal.connect(_on_next_round_signal)
 
@@ -46,7 +50,16 @@ func add_spawning_unit(index: int):
         return
     spawning_units[index] += 1
 
-func _input(event):
+func _on_select_click():
+    controller.set_selected(self, true)
+    var selected = controller.selected == self
+    select_box.set_selected(selected)
+
+func deselect():
+    select_box.set_selected(false)
+
+func _on_selected_input(event):
+# func _input(event):
     if event.is_action_pressed("spawn_unit_0"):
         add_spawning_unit(0)
     if event.is_action_pressed("spawn_unit_1"):
