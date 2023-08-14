@@ -1,11 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://tcynejlyen4i"]
+[gd_scene load_steps=9 format=3 uid="uid://tcynejlyen4i"]
 
 [ext_resource type="Script" path="res://Buildings/SpawnArea.gd" id="1_eds0f"]
+[ext_resource type="Script" path="res://Units/Faction.gd" id="2_vjrgm"]
+[ext_resource type="PackedScene" uid="uid://bblffax8bb1uc" path="res://Units/Mech/infantry.tscn" id="3_a7cp5"]
+[ext_resource type="PackedScene" uid="uid://bpthm1mhs4s7y" path="res://Control/SelectBox.tscn" id="3_jgylt"]
+[ext_resource type="Texture2D" uid="uid://dedlg4gomgelg" path="res://Assets/Units/infantry/infantry_body.png" id="4_6rk5m"]
+
+[sub_resource type="Resource" id="Resource_eh4lb"]
+script = ExtResource("2_vjrgm")
+id = 0
+faction_name = "Default"
+color = Color(0.4, 1, 0, 0.309804)
+allies = Array[String]([])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_in78m"]
+resource_local_to_scene = true
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h4m7f"]
+resource_local_to_scene = true
 
 [node name="SpawnArea" type="Node2D"]
 script = ExtResource("1_eds0f")
+faction = SubResource("Resource_eh4lb")
+unit_scene = ExtResource("3_a7cp5")
+unit_texture = ExtResource("4_6rk5m")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 16
@@ -14,3 +32,9 @@ collision_mask = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_in78m")
 debug_color = Color(0, 0.643137, 0.317647, 0.113725)
+
+[node name="SelectBox" parent="." instance=ExtResource("3_jgylt")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectBox"]
+shape = SubResource("RectangleShape2D_h4m7f")
+debug_color = Color(0.521569, 0.572549, 0, 0)

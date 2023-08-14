@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=3 uid="uid://i0u0a630t1in"]
+
+[ext_resource type="PackedScene" uid="uid://tcynejlyen4i" path="res://Buildings/spawn_area.tscn" id="1_fde8g"]
+[ext_resource type="PackedScene" uid="uid://rctg6skc0u4y" path="res://Units/Mech/officer.tscn" id="2_m4p0r"]
+[ext_resource type="Texture2D" uid="uid://sasnloj315gu" path="res://Assets/Units/officer/officer_body.png" id="3_002of"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0jdwr"]
+resource_local_to_scene = true
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k0lyg"]
+resource_local_to_scene = true
+
+[node name="SpawnInfantry" instance=ExtResource("1_fde8g")]
+unit_scene = ExtResource("2_m4p0r")
+unit_texture = ExtResource("3_002of")
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("RectangleShape2D_0jdwr")
+
+[node name="CollisionShape2D" parent="SelectBox" index="1"]
+shape = SubResource("RectangleShape2D_k0lyg")

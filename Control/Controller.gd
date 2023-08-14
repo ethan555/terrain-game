@@ -1,3 +1,4 @@
+class_name Controller
 extends Node2D
 
 enum State {
@@ -41,16 +42,29 @@ func round_timeout():
             next_round_signal.emit()
     timer.start(round_timeouts[current_state])
 
-func set_selected(node: Node2D, reset_on_same: bool):
+
+## Set the given unit or building as selected by the controller
+## `node`: The unit to be selected
+## `reset_on_same`: If the selected unit is the same as what is already selected, reset selected to null
+## `save_previous`: Push the previously selected unit onto the selection stack
+func set_selected(node: Node2D, reset_on_same: bool, save_previous: bool):
     if reset_on_same and selected == node:
         # Reset selected
         reset_selected()
         return
+    if is_instance_valid(selected):
+        selected.deselect()
+        if save_previous:
+            selected_stack.push_back(selected)
     selected = node
 
 func reset_selected():
+    print("RESETTING SELECTED")
     if len(selected_stack) > 0:
-        selected = selected_stack.pop_back()
+        if is_instance_valid(selected):
+            selected.deselect()
+        var new_selected = selected_stack.pop_back()
+        new_selected._on_select_click()
     else:
         if is_instance_valid(selected):
             selected.deselect()
@@ -80,7 +94,10 @@ func on_click(event):
             clicked_selectbox = true
             break
     if not clicked_selectbox:
-        reset_selected()
+        if is_instance_valid(selected):
+            selected._on_select_click()
+        else:
+            reset_selected()
 
 func _input(event):
     if event.is_action_pressed("end_turn"):

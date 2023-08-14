@@ -37,7 +37,7 @@ signal projectile_created(Projectile)
 
 @export var statuses : Dictionary
 
-var target_angle := (-Vector2.UP).angle()
+var target_angle := rotation
 
 var target : Node2D
 var primary_ready = true

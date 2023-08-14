@@ -85,9 +85,15 @@ class Map:
     func scale_position(position : Vector2) -> Vector2:
         return floor(position / scale)
 
+    func snap_position(position: Vector2) -> Vector2:
+        return floor(position / scale)
+
     ## Snap a world position to the map scale grid, in world coordinates
-    func snap_world_position(position : Vector2) -> Vector2:
-        return scale_position(position) * scale
+    func snap_world_position(position : Vector2, offset_x := false, offset_y := false) -> Vector2:
+        var result = snap_position(position) * scale
+        var offset = Vector2.RIGHT * int(offset_x) + Vector2.DOWN * int(offset_y)
+        offset = offset * scale / 2
+        return result + offset
 
     ## Scale a world position to the map scale, centered on cells
     func world_to_map(position : Vector2) -> Vector2:
@@ -179,8 +185,10 @@ class Map:
                     continue
                 var neighbor = get_cell(neighbor_pos)
                 var neighbor_dir : Vector2 = current_cell.position - neighbor.position
-                var height_diff = max(0, neighbor.height - current_cell.height)
-                var cost = current_cell.cost + neighbor_dir.length() + height_diff
+                var length_cost : float = neighbor_dir.length()
+                var height_diff = max(0, current_cell.height - neighbor.height) # max(0, neighbor.height - current_cell.height)
+                var height_cost = height_diff #pow(height_diff, 2.0)
+                var cost = current_cell.cost + length_cost + height_cost
                 if neighbor.id in visited:
                     if neighbor.cost > cost:
                         neighbor.cost = cost

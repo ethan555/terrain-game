@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://dahmf2tr3o5bo"]
+
+[ext_resource type="PackedScene" uid="uid://tcynejlyen4i" path="res://Buildings/spawn_area.tscn" id="1_hqps2"]
+[ext_resource type="PackedScene" uid="uid://va1d0lu63qbu" path="res://Units/Mech/cannon.tscn" id="2_mby07"]
+[ext_resource type="Texture2D" uid="uid://b1iyucpgugrr2" path="res://Assets/Units/cannon/cannon_body.png" id="3_v632i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hsc1q"]
+resource_local_to_scene = true
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dewhn"]
+resource_local_to_scene = true
+
+[node name="SpawnInfantry" instance=ExtResource("1_hqps2")]
+unit_columns = 2
+unit_scene = ExtResource("2_mby07")
+unit_texture = ExtResource("3_v632i")
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("RectangleShape2D_hsc1q")
+
+[node name="CollisionShape2D" parent="SelectBox" index="1"]
+shape = SubResource("RectangleShape2D_dewhn")

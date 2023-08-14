@@ -6,5 +6,5 @@ class_name Attack
 
 @export var multiplier : float = 1.0
 
-func get_damage():
-    return damage * multiplier
+func get_damage(armor):
+    return damage * multiplier - armor

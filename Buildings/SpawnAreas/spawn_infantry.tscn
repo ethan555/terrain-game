@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dx835s7g2fh6"]
+
+[ext_resource type="PackedScene" uid="uid://tcynejlyen4i" path="res://Buildings/spawn_area.tscn" id="1_egpen"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5w3c3"]
+resource_local_to_scene = true
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iv3ts"]
+resource_local_to_scene = true
+
+[node name="SpawnInfantry" instance=ExtResource("1_egpen")]
+unit_rows = 2
+unit_columns = 4
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("RectangleShape2D_5w3c3")
+
+[node name="CollisionShape2D" parent="SelectBox" index="1"]
+shape = SubResource("RectangleShape2D_iv3ts")

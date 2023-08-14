@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=3 uid="uid://c5l5btoolddsr"]
+
+[ext_resource type="PackedScene" uid="uid://tcynejlyen4i" path="res://Buildings/spawn_area.tscn" id="1_onsfl"]
+[ext_resource type="PackedScene" uid="uid://bwe0xla2snj4f" path="res://Units/Mech/railgunner.tscn" id="2_fk7k3"]
+[ext_resource type="Texture2D" uid="uid://dfmkk5126307s" path="res://Assets/Units/railgunner/railgunner_body.png" id="3_cu3e6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1tbsp"]
+resource_local_to_scene = true
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r35nj"]
+resource_local_to_scene = true
+
+[node name="SpawnRailgunner" instance=ExtResource("1_onsfl")]
+unit_scene = ExtResource("2_fk7k3")
+unit_texture = ExtResource("3_cu3e6")
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("RectangleShape2D_1tbsp")
+
+[node name="CollisionShape2D" parent="SelectBox" index="1"]
+shape = SubResource("RectangleShape2D_r35nj")

@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://ctnx3asmiv0xs"]
+[gd_scene load_steps=8 format=3 uid="uid://ctnx3asmiv0xs"]
 
 [ext_resource type="PackedScene" uid="uid://baaccbp77y6p8" path="res://Buildings/building.tscn" id="1_2ywug"]
-[ext_resource type="PackedScene" uid="uid://bblffax8bb1uc" path="res://Units/Mech/infantry.tscn" id="2_cnf40"]
-[ext_resource type="PackedScene" uid="uid://dl7w4uuif7bsv" path="res://Units/Mech/levtank.tscn" id="3_dj51t"]
-[ext_resource type="PackedScene" uid="uid://va1d0lu63qbu" path="res://Units/Mech/cannon.tscn" id="3_y8kfj"]
-[ext_resource type="PackedScene" uid="uid://rctg6skc0u4y" path="res://Units/Mech/officer.tscn" id="4_lifa2"]
-[ext_resource type="PackedScene" uid="uid://bwe0xla2snj4f" path="res://Units/Mech/railgunner.tscn" id="5_e7vnx"]
+[ext_resource type="PackedScene" uid="uid://dx835s7g2fh6" path="res://Buildings/SpawnAreas/spawn_infantry.tscn" id="2_bw6nq"]
+[ext_resource type="PackedScene" uid="uid://dahmf2tr3o5bo" path="res://Buildings/SpawnAreas/spawn_cannon.tscn" id="3_ek5cb"]
+[ext_resource type="PackedScene" uid="uid://c5l5btoolddsr" path="res://Buildings/SpawnAreas/spawn_railgunner.tscn" id="4_6x1nf"]
+[ext_resource type="PackedScene" uid="uid://i0u0a630t1in" path="res://Buildings/SpawnAreas/spawn_officer.tscn" id="5_sd2k4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s23ht"]
 size = Vector2(32, 32)
@@ -14,7 +13,7 @@ size = Vector2(32, 32)
 size = Vector2(32, 32)
 
 [node name="Factory" instance=ExtResource("1_2ywug")]
-spawnable_units = Array[PackedScene]([ExtResource("2_cnf40"), ExtResource("3_y8kfj"), ExtResource("4_lifa2"), ExtResource("5_e7vnx"), ExtResource("3_dj51t")])
+spawn_areas = Array[PackedScene]([ExtResource("2_bw6nq"), ExtResource("3_ek5cb"), ExtResource("4_6x1nf"), ExtResource("5_sd2k4")])
 
 [node name="Stats" parent="." index="1"]
 MAX_HEALTH = 100.0
