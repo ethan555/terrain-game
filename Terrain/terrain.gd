@@ -273,12 +273,14 @@ func _ready():
     init_map()
     init_shader()
 
-func _input_event(_viewport, event, _shape_idx):
-    if event is InputEventMouseButton \
-        and event.button_index == MOUSE_BUTTON_RIGHT \
-        and event.is_pressed():
+    controller.terrain_click.connect(on_click)
 
-        on_click()
+# func _input_event(_viewport, event, _shape_idx):
+#     if event is InputEventMouseButton \
+#         and event.button_index == MOUSE_BUTTON_RIGHT \
+#         and event.is_pressed():
+
+#         on_click()
         # get_tree().get_root().set_input_as_handled()
 
 func _process(_delta):

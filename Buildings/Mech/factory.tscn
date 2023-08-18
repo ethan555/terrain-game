@@ -14,6 +14,7 @@ size = Vector2(32, 32)
 
 [node name="Factory" instance=ExtResource("1_2ywug")]
 spawn_areas = Array[PackedScene]([ExtResource("2_bw6nq"), ExtResource("3_ek5cb"), ExtResource("4_6x1nf"), ExtResource("5_sd2k4")])
+spawn_radius = 256.0
 
 [node name="Stats" parent="." index="1"]
 MAX_HEALTH = 100.0

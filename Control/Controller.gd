@@ -25,7 +25,9 @@ var energy := 3
 
 var selected_stack : Array[Node2D] = []
 var selected : Node2D
+var round_counter := 0
 signal next_round_signal
+signal terrain_click
 
 func _ready():
     timer.connect("timeout", round_timeout)
@@ -39,7 +41,10 @@ func round_timeout():
         State.Building:
             # Switch to Play
             current_state = State.Play
-            next_round_signal.emit()
+            var spawning_round : bool = round_counter % 3 == 0
+            next_round_signal.emit(round_counter, spawning_round)
+            ui.get_node("RoundLabel").text = "Round " + str(round_counter + 1)
+            round_counter += 1
     timer.start(round_timeouts[current_state])
 
 
@@ -99,15 +104,25 @@ func on_click(event):
         else:
             reset_selected()
 
+func on_right_click(_event):
+    if is_instance_valid(selected):
+        reset_selected()
+    else:
+        terrain_click.emit()
+
 func _input(event):
     if event.is_action_pressed("end_turn"):
         if current_state == State.Building:
             timer.start(0.1)
-    if event is InputEventMouseButton \
-        and event.button_index == MOUSE_BUTTON_LEFT \
-        and event.is_pressed():
+    if event is InputEventMouseButton:
+        if event.button_index == MOUSE_BUTTON_LEFT \
+            and event.is_pressed():
 
-        on_click(event)
+            on_click(event)
+        if event.button_index == MOUSE_BUTTON_RIGHT \
+            and event.is_pressed():
+
+            on_right_click(event)
 
     if is_instance_valid(selected):
         selected._on_selected_input(event)

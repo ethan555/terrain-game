@@ -123,7 +123,7 @@ func ai_target(delta) -> void:
 
 
 func _process(_delta):
-    sprite.scale = Vector2(1.0, 1.0) * max(1.0, 1.0 / camera.zoom.x)
+    sprite.scale = Vector2.ONE * max(1.0, 1.0 / camera.zoom.x)
 
     # Only move and target during play state
     var play_paused = controller.current_state != controller.State.Play

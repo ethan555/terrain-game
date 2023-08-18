@@ -14,6 +14,8 @@ extends Node2D
 @export var spawn_areas : Array[PackedScene]
 @export var spawn_radius : float
 
+var radius_color : Color
+
 # @export var spawnable_units : Array[PackedScene]
 
 # var spawning_units : Array
@@ -25,6 +27,9 @@ func _ready():
     stats.connect("death", _on_death)
 
     select_box.connect("select_click", _on_select_click)
+
+    radius_color = faction.color
+    radius_color.a = 0.2
 
     # controller.next_round_signal.connect(_on_next_round_signal)
 
@@ -99,3 +104,11 @@ func _on_selected_input(event):
 
 func _on_death() -> void:
     queue_free()
+
+func _draw():
+    var center = Vector2.ZERO
+    var radius = spawn_radius
+    var angle_from = 0
+    var angle_to = 360
+    var color = radius_color
+    draw_arc(center, radius, angle_from, angle_to, 64, color)

@@ -23,6 +23,8 @@ var placed_position : Vector2
 var select_color : Color
 var unit_color : Color
 
+var valid_position := false
+
 var building : Building = null
 
 func init_spawn_area():
@@ -67,10 +69,11 @@ func _on_select_click():
         controller.set_selected(self, true, false)
         placed = false
     else:
-        placed_position = global_position
-        placed = true
-        instanced = true
-        controller.reset_selected()
+        if valid_position:
+            placed_position = global_position
+            placed = true
+            instanced = true
+            controller.reset_selected()
 
 func deselect():
     select_box.set_selected(false)
@@ -103,7 +106,9 @@ func spawn_unit(spawn_position: Vector2):
     inst.global_position = global_position + spawn_position
     spawn_node.add_child(inst)
 
-func _on_next_round_signal():
+func _on_next_round_signal(_round_counter: int, spawning_round: bool):
+    if not spawning_round:
+        return
     # Spawn units
     # var unit_center_vector = -unit_texture.get_size() / 2.0
     var unit_spacing = unit_scale * 16  # terrain.map.scale
@@ -127,6 +132,9 @@ func _process(_delta):
     var offset_y = unit_columns % 2 == 1
     var grid_pos := terrain.map.snap_world_position(mouse_pos, offset_x, offset_y)
     global_position = grid_pos
+
+    var building_distance := (building.global_position - global_position).length()
+    valid_position = building_distance <= building.spawn_radius
 
 func _draw():
     var area_shape : RectangleShape2D = area_collision_shape.shape
