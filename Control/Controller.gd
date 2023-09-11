@@ -21,7 +21,9 @@ enum State {
 
 var current_state = State.Building
 
-var energy := 3
+# var energy := 3
+var starting_faction_resources : Array[FactionResources]
+var faction_resources : Dictionary = {}
 
 var selected_stack : Array[Node2D] = []
 var selected : Node2D
@@ -29,9 +31,15 @@ var round_counter := 0
 signal next_round_signal
 signal terrain_click
 
+func init_faction_resources():
+    for sfr in starting_faction_resources:
+        faction_resources[sfr.faction.name] = sfr
+
 func _ready():
     timer.connect("timeout", round_timeout)
     timer.start(round_timeouts[current_state])
+
+    init_faction_resources()
 
 func round_timeout():
     match (current_state):

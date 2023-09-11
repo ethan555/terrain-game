@@ -324,7 +324,7 @@ func get_unit_destination(id):
 func get_unit_move(unit_position : Vector2, faction: Faction):
     if faction.id != 0:
         return Vector2.ZERO
-    var scaled_position = map.world_to_map(unit_position)
+    var scaled_position := map.world_to_map(unit_position)
     var unit_cell : Cell = map.get_cell(scaled_position)
     return unit_cell.direction
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dl7w4uuif7bsv"]
+[gd_scene load_steps=8 format=3 uid="uid://dl7w4uuif7bsv"]
 
 [ext_resource type="PackedScene" uid="uid://dc88vw2h1s01t" path="res://Units/unit.tscn" id="1_7jt5f"]
 [ext_resource type="PackedScene" uid="uid://bi53gs4igb74m" path="res://Projectiles/burst.tscn" id="2_7l3fm"]
@@ -15,10 +15,14 @@ radius = 6.0
 resource_local_to_scene = true
 radius = 140.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_jadle"]
+resource_local_to_scene = true
+
 [node name="Levtank" instance=ExtResource("1_7jt5f")]
-move_speed = 160.0
 primary = ExtResource("2_7l3fm")
 primary_offset = Vector2(5, 0)
+move_speed = 160.0
+mass = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 shape = SubResource("CircleShape2D_pe7bw")
@@ -34,4 +38,9 @@ debug_color = Color(0, 0.6, 0.701961, 0.0196078)
 texture = ExtResource("3_7jqtc")
 
 [node name="Stats" parent="." index="4"]
-MAX_HEALTH = 100.0
+_HEALTH = 100.0
+_ARMOR = 1.0
+_SPEED = 160.0
+
+[node name="CollisionShape2D" parent="Boid" index="0"]
+shape = SubResource("CircleShape2D_jadle")

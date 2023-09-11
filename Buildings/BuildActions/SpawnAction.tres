@@ -1,0 +1,7 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://c1od1yvvgrson"]
+
+[ext_resource type="Script" path="res://Buildings/BuildActions/SpawnAction.gd" id="1_xh0vm"]
+
+[resource]
+script = ExtResource("1_xh0vm")
+cost = 0

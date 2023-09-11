@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Projectiles/projectile.gd" id="1_h7ryo"]
 [ext_resource type="PackedScene" uid="uid://bm6g6pduhak8q" path="res://Units/Hitbox.tscn" id="1_qi8ll"]
 
-[node name="Projectile" type="Node2D"]
+[node name="Projectile" type="Node2D" groups=["projectiles"]]
 script = ExtResource("1_h7ryo")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

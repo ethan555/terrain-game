@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c8edx4pvxnycy" path="res://Units/Stats.tscn" id="3_383bd"]
 [ext_resource type="PackedScene" uid="uid://bpthm1mhs4s7y" path="res://Control/SelectBox.tscn" id="5_oovge"]
 
-[node name="Building" type="Node2D"]
+[node name="Building" type="Node2D" groups=["buildings"]]
 script = ExtResource("1_oi5f8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

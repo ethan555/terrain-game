@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="FactionResources" load_steps=2 format=3 uid="uid://cob6oktux2oej"]
+
+[ext_resource type="Script" path="res://Control/FactionResources.gd" id="1_crelr"]
+
+[resource]
+script = ExtResource("1_crelr")
+energy = 1

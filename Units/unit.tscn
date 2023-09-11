@@ -1,12 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://dc88vw2h1s01t"]
+[gd_scene load_steps=9 format=3 uid="uid://dc88vw2h1s01t"]
 
 [ext_resource type="Script" path="res://Units/unit.gd" id="1_tqjln"]
 [ext_resource type="Texture2D" uid="uid://dedlg4gomgelg" path="res://Assets/Units/infantry/infantry_body.png" id="2_5tmj6"]
 [ext_resource type="PackedScene" uid="uid://c8edx4pvxnycy" path="res://Units/Stats.tscn" id="3_6f5mt"]
 [ext_resource type="PackedScene" uid="uid://b811i4lglnecn" path="res://Units/Hurtbox.tscn" id="5_30kro"]
 [ext_resource type="PackedScene" uid="uid://bt8jhym3n4ary" path="res://Units/Vision.tscn" id="5_ep67k"]
+[ext_resource type="PackedScene" uid="uid://df1olgiw810pu" path="res://Units/Boid.tscn" id="6_twloi"]
+[ext_resource type="Script" path="res://Units/Boid.gd" id="7_057uj"]
 
-[node name="Unit" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_6m6nl"]
+resource_local_to_scene = true
+
+[node name="Unit" type="CharacterBody2D" groups=["units"]]
+collision_mask = 524288
+motion_mode = 1
+wall_min_slide_angle = 0.0
+platform_floor_layers = 0
+platform_wall_layers = 524288
 script = ExtResource("1_tqjln")
 primary_offset = Vector2(2, 2)
 
@@ -21,3 +31,10 @@ texture = ExtResource("2_5tmj6")
 [node name="Stats" parent="." instance=ExtResource("3_6f5mt")]
 
 [node name="PrimaryTimer" type="Timer" parent="."]
+
+[node name="Boid" parent="." instance=ExtResource("6_twloi")]
+script = ExtResource("7_057uj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boid"]
+shape = SubResource("CircleShape2D_6m6nl")
+debug_color = Color(0, 0, 0.701961, 0)

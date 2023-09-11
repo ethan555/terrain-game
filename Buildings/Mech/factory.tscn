@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://c5l5btoolddsr" path="res://Buildings/SpawnAreas/spawn_railgunner.tscn" id="4_6x1nf"]
 [ext_resource type="PackedScene" uid="uid://i0u0a630t1in" path="res://Buildings/SpawnAreas/spawn_officer.tscn" id="5_sd2k4"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_s23ht"]
-size = Vector2(32, 32)
+[sub_resource type="CircleShape2D" id="CircleShape2D_o5cxf"]
+radius = 16.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q2hf4"]
 size = Vector2(32, 32)
@@ -16,11 +16,8 @@ size = Vector2(32, 32)
 spawn_areas = Array[PackedScene]([ExtResource("2_bw6nq"), ExtResource("3_ek5cb"), ExtResource("4_6x1nf"), ExtResource("5_sd2k4")])
 spawn_radius = 256.0
 
-[node name="Stats" parent="." index="1"]
-MAX_HEALTH = 100.0
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" index="0"]
-shape = SubResource("RectangleShape2D_s23ht")
+shape = SubResource("CircleShape2D_o5cxf")
 debug_color = Color(0, 0.6, 0.701961, 0.0862745)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SelectBox" index="1"]

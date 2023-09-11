@@ -58,6 +58,7 @@ faction = SubResource("Resource_fya7a")
 
 [node name="Levtank2" parent="." instance=ExtResource("4_6ybn6")]
 position = Vector2(119, 90)
+wall_min_slide_angle = 0.261799
 faction = SubResource("Resource_fya7a")
 
 [node name="Levtank3" parent="." instance=ExtResource("4_6ybn6")]
@@ -66,22 +67,33 @@ faction = SubResource("Resource_fya7a")
 
 [node name="Levtank4" parent="." instance=ExtResource("4_6ybn6")]
 position = Vector2(104, 103)
+collision_mask = 1
+wall_min_slide_angle = 0.261799
+platform_floor_layers = 4294967295
+platform_wall_layers = 0
 faction = SubResource("Resource_fya7a")
 
 [node name="Levtank5" parent="." instance=ExtResource("4_6ybn6")]
 position = Vector2(136, 91)
+collision_mask = 1
+wall_min_slide_angle = 0.261799
+platform_floor_layers = 4294967295
+platform_wall_layers = 0
 faction = SubResource("Resource_fya7a")
 
 [node name="Levtank6" parent="." instance=ExtResource("4_6ybn6")]
 position = Vector2(136, 102)
+wall_min_slide_angle = 0.261799
 faction = SubResource("Resource_fya7a")
 
 [node name="Levtank7" parent="." instance=ExtResource("4_6ybn6")]
 position = Vector2(152, 92)
+wall_min_slide_angle = 0.261799
 faction = SubResource("Resource_fya7a")
 
 [node name="Levtank8" parent="." instance=ExtResource("4_6ybn6")]
 position = Vector2(151, 104)
+wall_min_slide_angle = 0.261799
 faction = SubResource("Resource_fya7a")
 
 [node name="Levtank9" parent="." instance=ExtResource("4_6ybn6")]
@@ -90,10 +102,16 @@ faction = SubResource("Resource_w5f52")
 
 [node name="Levtank10" parent="." instance=ExtResource("4_6ybn6")]
 position = Vector2(357, 381)
+wall_min_slide_angle = 0.261799
 faction = SubResource("Resource_w5f52")
 
 [node name="Levtank11" parent="." instance=ExtResource("4_6ybn6")]
 position = Vector2(586, 309)
+collision_mask = 1
+motion_mode = 0
+wall_min_slide_angle = 0.261799
+platform_floor_layers = 4294967295
+platform_wall_layers = 0
 faction = SubResource("Resource_w5f52")
 
 [node name="Factory" parent="." instance=ExtResource("9_gi1d6")]
@@ -102,84 +120,193 @@ faction = SubResource("Resource_fya7a")
 
 [node name="Infantry" parent="." instance=ExtResource("9_x37bf")]
 position = Vector2(1373, 570)
+collision_mask = 1
+motion_mode = 0
+wall_min_slide_angle = 0.261799
+platform_floor_layers = 4294967295
+platform_wall_layers = 0
 faction = SubResource("Resource_w5f52")
 
 [node name="Infantry2" parent="." instance=ExtResource("9_x37bf")]
 position = Vector2(1293, 646)
+collision_mask = 1
+motion_mode = 0
+wall_min_slide_angle = 0.261799
+platform_floor_layers = 4294967295
+platform_wall_layers = 0
 faction = SubResource("Resource_w5f52")
 
 [node name="Infantry3" parent="." instance=ExtResource("9_x37bf")]
 position = Vector2(1358, 591)
+collision_mask = 1
+motion_mode = 0
+wall_min_slide_angle = 0.261799
+platform_floor_layers = 4294967295
+platform_wall_layers = 0
 faction = SubResource("Resource_w5f52")
 
 [node name="Infantry4" parent="." instance=ExtResource("9_x37bf")]
 position = Vector2(1278, 667)
+collision_mask = 1
+motion_mode = 0
+wall_min_slide_angle = 0.261799
+platform_floor_layers = 4294967295
+platform_wall_layers = 0
 faction = SubResource("Resource_w5f52")
 
 [node name="Infantry5" parent="." instance=ExtResource("9_x37bf")]
 position = Vector2(1359, 557)
+collision_mask = 1
+motion_mode = 0
+wall_min_slide_angle = 0.261799
+platform_floor_layers = 4294967295
+platform_wall_layers = 0
 faction = SubResource("Resource_w5f52")
 
 [node name="Infantry6" parent="." instance=ExtResource("9_x37bf")]
 position = Vector2(1279, 633)
+collision_mask = 1
+motion_mode = 0
+wall_min_slide_angle = 0.261799
+platform_floor_layers = 4294967295
+platform_wall_layers = 0
 faction = SubResource("Resource_w5f52")
 
 [node name="Infantry7" parent="." instance=ExtResource("9_x37bf")]
 position = Vector2(1344, 578)
+collision_mask = 1
+motion_mode = 0
+wall_min_slide_angle = 0.261799
+platform_floor_layers = 4294967295
+platform_wall_layers = 0
 faction = SubResource("Resource_w5f52")
 
 [node name="Infantry8" parent="." instance=ExtResource("9_x37bf")]
 position = Vector2(1264, 654)
+collision_mask = 1
+motion_mode = 0
+wall_min_slide_angle = 0.261799
+platform_floor_layers = 4294967295
+platform_wall_layers = 0
 faction = SubResource("Resource_w5f52")
 
 [node name="Infantry9" parent="." instance=ExtResource("9_x37bf")]
 position = Vector2(1391, 566)
+collision_mask = 1
+motion_mode = 0
+wall_min_slide_angle = 0.261799
+platform_floor_layers = 4294967295
+platform_wall_layers = 0
 faction = SubResource("Resource_w5f52")
 
 [node name="Infantry10" parent="." instance=ExtResource("9_x37bf")]
 position = Vector2(1311, 642)
+collision_mask = 1
+motion_mode = 0
+wall_min_slide_angle = 0.261799
+platform_floor_layers = 4294967295
+platform_wall_layers = 0
 faction = SubResource("Resource_w5f52")
 
 [node name="Infantry11" parent="." instance=ExtResource("9_x37bf")]
 position = Vector2(1376, 587)
+collision_mask = 1
+motion_mode = 0
+wall_min_slide_angle = 0.261799
+platform_floor_layers = 4294967295
+platform_wall_layers = 0
 faction = SubResource("Resource_w5f52")
 
 [node name="Infantry12" parent="." instance=ExtResource("9_x37bf")]
 position = Vector2(1296, 663)
+collision_mask = 1
+motion_mode = 0
+wall_min_slide_angle = 0.261799
+platform_floor_layers = 4294967295
+platform_wall_layers = 0
 faction = SubResource("Resource_w5f52")
 
 [node name="Infantry13" parent="." instance=ExtResource("9_x37bf")]
 position = Vector2(1377, 553)
+collision_mask = 1
+motion_mode = 0
+wall_min_slide_angle = 0.261799
+platform_floor_layers = 4294967295
+platform_wall_layers = 0
 faction = SubResource("Resource_w5f52")
 
 [node name="Infantry14" parent="." instance=ExtResource("9_x37bf")]
 position = Vector2(1297, 629)
+collision_mask = 1
+motion_mode = 0
+wall_min_slide_angle = 0.261799
+platform_floor_layers = 4294967295
+platform_wall_layers = 0
 faction = SubResource("Resource_w5f52")
 
 [node name="Infantry15" parent="." instance=ExtResource("9_x37bf")]
 position = Vector2(1362, 574)
+collision_mask = 1
+motion_mode = 0
+wall_min_slide_angle = 0.261799
+platform_floor_layers = 4294967295
+platform_wall_layers = 0
 faction = SubResource("Resource_w5f52")
 
 [node name="Infantry16" parent="." instance=ExtResource("9_x37bf")]
 position = Vector2(1282, 650)
+collision_mask = 1
+motion_mode = 0
+wall_min_slide_angle = 0.261799
+platform_floor_layers = 4294967295
+platform_wall_layers = 0
 faction = SubResource("Resource_w5f52")
 
 [node name="Cannon" parent="." instance=ExtResource("10_ahnt5")]
 position = Vector2(1261, 674)
+collision_mask = 1
+motion_mode = 0
+wall_min_slide_angle = 0.261799
+platform_floor_layers = 4294967295
+platform_wall_layers = 0
 faction = SubResource("Resource_w5f52")
 
 [node name="Cannon2" parent="." instance=ExtResource("10_ahnt5")]
 position = Vector2(1333, 607)
+collision_mask = 1
+motion_mode = 0
+wall_min_slide_angle = 0.261799
+platform_floor_layers = 4294967295
+platform_wall_layers = 0
 faction = SubResource("Resource_w5f52")
 
 [node name="Cannon3" parent="." instance=ExtResource("10_ahnt5")]
 position = Vector2(1398, 544)
+collision_mask = 1
+motion_mode = 0
+wall_min_slide_angle = 0.261799
+platform_floor_layers = 4294967295
+platform_wall_layers = 0
 faction = SubResource("Resource_w5f52")
 
 [node name="Railgunner" parent="." instance=ExtResource("11_cmdd2")]
 position = Vector2(1283, 711)
+collision_mask = 1
+motion_mode = 0
+wall_min_slide_angle = 0.261799
+platform_floor_layers = 4294967295
+platform_wall_layers = 0
 faction = SubResource("Resource_w5f52")
 
 [node name="Railgunner2" parent="." instance=ExtResource("11_cmdd2")]
 position = Vector2(1436, 567)
+collision_mask = 1
+motion_mode = 0
+wall_min_slide_angle = 0.261799
+platform_floor_layers = 4294967295
+platform_wall_layers = 0
 faction = SubResource("Resource_w5f52")
+
+[node name="Wall5" parent="." instance=ExtResource("4_oe0rq")]
+position = Vector2(849, 481)
+scale = Vector2(128, 128)

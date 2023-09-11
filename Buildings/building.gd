@@ -6,11 +6,14 @@ extends Node2D
 @onready var controller : Controller = get_node("/root/Level/Controller")
 
 @onready var select_box : SelectBox = $SelectBox
+@onready var hurtbox : Hurtbox = $Hurtbox
+@onready var hurtbox_radius : float = hurtbox.collision_radius
 
 @export var faction : Faction
 @export var actions : Array[Action]
 @export var passive_actions : Array[Action]
 
+@export var build_actions : Array[BuildAction]
 @export var spawn_areas : Array[PackedScene]
 @export var spawn_radius : float
 

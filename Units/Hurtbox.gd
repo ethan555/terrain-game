@@ -1,7 +1,8 @@
 class_name Hurtbox
 extends Area2D
 
-@onready var collision_shape := $CollisionShape2D
+@onready var collision_shape : CollisionShape2D = $CollisionShape2D
+@onready var collision_radius : float = collision_shape.shape.radius
 
 signal aura_entered
 

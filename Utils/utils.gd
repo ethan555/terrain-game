@@ -6,6 +6,9 @@ static func dlerp(a, b, rate, delta):
 static func dlerps(a, b, rate, delta, seconds):
     return lerp(a, b, 1 - pow(rate, delta / seconds))
 
+static func modulo(a, b):
+    return (a % b + b) % b
+
 static func approach(a, b, rate) -> float:
     if a == b:
         return b

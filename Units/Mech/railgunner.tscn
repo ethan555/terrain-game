@@ -17,11 +17,11 @@ resource_local_to_scene = true
 radius = 300.0
 
 [node name="Railgunner" instance=ExtResource("1_tqlwo")]
-move_speed = 50.0
 vision_radius = 300.0
 primary = ExtResource("2_xnv58")
 primary_time = 3.0
 primary_offset = Vector2(5, 2)
+move_speed = 50.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 shape = SubResource("CircleShape2D_g8gjg")

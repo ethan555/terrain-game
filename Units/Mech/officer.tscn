@@ -21,8 +21,9 @@ resource_local_to_scene = true
 radius = 60.0
 
 [node name="Infantry" instance=ExtResource("1_gd6mp")]
-move_speed = 50.0
 primary_time = 0.5
+move_speed = 50.0
+mass = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 shape = SubResource("CircleShape2D_g8gjg")
@@ -38,7 +39,8 @@ debug_color = Color(0, 0.6, 0.701961, 0.0196078)
 texture = ExtResource("2_xfugb")
 
 [node name="Stats" parent="." index="4"]
-MAX_HEALTH = 30.0
+_HEALTH = 30.0
+_ARMOR = 1.0
 
 [node name="AuraCommand" type="Area2D" parent="." index="6"]
 collision_layer = 2
