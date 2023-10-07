@@ -1,7 +1,10 @@
-[gd_scene format=3 uid="uid://df1olgiw810pu"]
+[gd_scene load_steps=2 format=3 uid="uid://df1olgiw810pu"]
+
+[ext_resource type="Script" path="res://Units/Boid.gd" id="1_etxuk"]
 
 [node name="Boid" type="Area2D"]
 collision_layer = 0
 collision_mask = 2
 input_pickable = false
 monitorable = false
+script = ExtResource("1_etxuk")

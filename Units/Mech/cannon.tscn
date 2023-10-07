@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://va1d0lu63qbu"]
+[gd_scene load_steps=8 format=3 uid="uid://va1d0lu63qbu"]
 
 [ext_resource type="PackedScene" uid="uid://dc88vw2h1s01t" path="res://Units/unit.tscn" id="1_nvnev"]
 [ext_resource type="Texture2D" uid="uid://b1iyucpgugrr2" path="res://Assets/Units/cannon/cannon_body.png" id="2_eeg4v"]
@@ -15,6 +15,9 @@ radius = 3.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_1eg3w"]
 resource_local_to_scene = true
 radius = 140.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vfmcx"]
+resource_local_to_scene = true
 
 [node name="Cannon" instance=ExtResource("1_nvnev")]
 primary = ExtResource("2_nhcw1")
@@ -39,3 +42,6 @@ texture = ExtResource("2_eeg4v")
 [node name="Stats" parent="." index="4"]
 _HEALTH = 30.0
 _ARMOR = 1.0
+
+[node name="CollisionShape2D" parent="Boid" index="0"]
+shape = SubResource("CircleShape2D_vfmcx")

@@ -26,8 +26,8 @@ func check_boid(key) -> bool:
 
 ## Returns Avoidance: Array[avoidance direction: Vector2, avoidance amount: float]
 func calculate_avoidance(u : Unit) -> Array:
-    var adist : Vector2 = u.global_position - parent.global_position
-    var alen := adist.length()
+    var adist : Vector2 = (u.global_position - parent.global_position)
+    var alen : float = max(0, adist.length()) # - (u.collider.shape.radius + parent.collider.shape.radius))
     # if alen > radius:
     #     continue
 
@@ -51,43 +51,49 @@ func calculate_avoidance(u : Unit) -> Array:
 
     return [avoidance, avoid_amount]
 
+func calculate_boid_vector(moving, key) -> Vector2:
+    var u : Unit = boids[key]
+    var bv := Vector2.ZERO
+    var avoidance : Array
+    if key in calculated:
+        avoidance = calculated[key]
+        # print(parent.name + " CALCULATED " + u.name + " " + str(avoidance[0]))
+    else: 
+        avoidance = calculate_avoidance(u)
+        # counter += 1
+        u.boid.calculated[parent.name] = [-avoidance[0], avoidance[1]]
+        # print(parent.name + " DONE " + u.name + " " + str(avoidance[0]))
+    bv += avoidance[0]
+
+    # Only care about other velocity if we are moving
+    if !moving:
+        return bv
+    #     continue
+    var v := u.velocity
+    var vdir := v.normalized()
+
+    bv += vdir * avoidance[1]
+
+    return bv
+
 func get_boid_direction(moving: bool) -> Vector2:
     var bv := Vector2.ZERO
 
-    var counter : int = 0
+    # var counter : int = 0
     # var inside_the_house := false
     for key in boids.keys():
-        if counter >= MAX_BOIDS:
-            break
+        # if counter >= MAX_BOIDS:
+        #     break
         if not check_boid(key):
             continue
 
-        var u : Unit = boids[key]
-        var avoidance : Array
-        if key in calculated:
-            avoidance = calculated[key]
-            # print(parent.name + " CALCULATED " + u.name + " " + str(avoidance[0]))
-        else: 
-            avoidance = calculate_avoidance(u)
-            u.boid.calculated[parent.name] = [-avoidance[0], avoidance[1]]
-            # print(parent.name + " DONE " + u.name + " " + str(avoidance[0]))
-        bv += avoidance[0]
-
-        # Only care about other velocity if we are moving
-        if !moving:
-            continue
-        var v := u.velocity
-        var vdir := v.normalized()
-
-        bv += vdir * avoidance[1]
-
-        counter += 1
+        bv += calculate_boid_vector(moving, key)
 
     bv = bv.normalized()
     # if inside_the_house:
     #     print("BV: " + str(bv))
 
-    calculated.clear()
+    calculated = {}
 
     return bv
 

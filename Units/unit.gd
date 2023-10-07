@@ -174,7 +174,7 @@ func _process(_delta):
     if play_paused:
         return
     ai_target(_delta)
-    lax = get_tree().get_nodes_in_group("units").size() / terrain.map.scale
+    lax = max(2, get_tree().get_nodes_in_group("units").size() / terrain.map.scale)
     update_target_velocity(_delta)
 
 # func get_boid_velocity(moving: bool) -> Vector2:

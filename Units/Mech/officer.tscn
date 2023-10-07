@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://rctg6skc0u4y"]
+[gd_scene load_steps=9 format=3 uid="uid://rctg6skc0u4y"]
 
 [ext_resource type="PackedScene" uid="uid://dc88vw2h1s01t" path="res://Units/unit.tscn" id="1_gd6mp"]
 [ext_resource type="Texture2D" uid="uid://sasnloj315gu" path="res://Assets/Units/officer/officer_body.png" id="2_xfugb"]
@@ -19,6 +19,9 @@ radius = 140.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_8dr00"]
 resource_local_to_scene = true
 radius = 60.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p00m1"]
+resource_local_to_scene = true
 
 [node name="Infantry" instance=ExtResource("1_gd6mp")]
 primary_time = 0.5
@@ -51,3 +54,6 @@ script = ExtResource("3_vty74")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AuraCommand" index="0"]
 shape = SubResource("CircleShape2D_8dr00")
 debug_color = Color(0.701961, 0.372549, 0, 0)
+
+[node name="CollisionShape2D" parent="Boid" index="0"]
+shape = SubResource("CircleShape2D_p00m1")

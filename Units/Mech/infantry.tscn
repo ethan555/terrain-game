@@ -19,7 +19,8 @@ resource_local_to_scene = true
 
 [node name="Infantry" instance=ExtResource("1_87dye")]
 primary_time = 0.5
-move_speed = 50.0
+move_speed = 30.0
+acceleration = 50.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 shape = SubResource("CircleShape2D_g8gjg")

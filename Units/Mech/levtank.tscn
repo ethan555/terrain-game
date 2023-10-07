@@ -42,5 +42,8 @@ _HEALTH = 100.0
 _ARMOR = 1.0
 _SPEED = 160.0
 
+[node name="Boid" parent="." index="6"]
+radius = 12.0
+
 [node name="CollisionShape2D" parent="Boid" index="0"]
 shape = SubResource("CircleShape2D_jadle")

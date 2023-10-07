@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bwe0xla2snj4f"]
+[gd_scene load_steps=8 format=3 uid="uid://bwe0xla2snj4f"]
 
 [ext_resource type="PackedScene" uid="uid://dc88vw2h1s01t" path="res://Units/unit.tscn" id="1_tqlwo"]
 [ext_resource type="PackedScene" uid="uid://yr3a3a23o2ip" path="res://Projectiles/shell.tscn" id="2_xnv58"]
@@ -15,6 +15,9 @@ radius = 3.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_1eg3w"]
 resource_local_to_scene = true
 radius = 300.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v81ji"]
+resource_local_to_scene = true
 
 [node name="Railgunner" instance=ExtResource("1_tqlwo")]
 vision_radius = 300.0
@@ -35,3 +38,6 @@ debug_color = Color(0, 0.6, 0.701961, 0.0196078)
 
 [node name="Sprite2D" parent="." index="3"]
 texture = ExtResource("3_mu73a")
+
+[node name="CollisionShape2D" parent="Boid" index="0"]
+shape = SubResource("CircleShape2D_v81ji")
