@@ -23,20 +23,20 @@ signal projectile_created(Projectile)
 @export_category("Stats")
 @export var faction : Faction
 
-@export var vision_radius : float = 140
+# @export var vision_radius : float = 140
 @export var primary := preload("res://Projectiles/bullet.tscn")
 @export var primary_time : float = 1
 @export var primary_offset : Vector2 = Vector2(0, 0)
 
 @export_category("Movement")
 @export var collision_moving_scale : float = .5
-@export var move_speed : float = 300
+# @export var move_speed : float = 300
 @export var acceleration : float = 100
 @export var push : float = 10
 
 @export var lax : float = 1.0
 # @export var lax_rate : float = 10.0
-@export var rotation_speed : float = 3 * PI
+# @export var rotation_speed : float = 3 * PI
 @export var FRICTION : float = 100 * 9.8
 
 @export var mobile : bool = false
@@ -62,7 +62,7 @@ var primary_ready = true
 # var boids : Dictionary = {}
 
 func _ready():
-    vision.update_vision_radius(vision_radius)
+    vision.update_vision_radius(stats.vision_radius)
     vision.enemy_in_range.connect(_on_enemy_in_range)
     vision.enemy_left_range.connect(_on_enemy_left_range)
 
@@ -86,6 +86,7 @@ func _on_enemy_in_range(unit: Node2D) -> void:
             potential_targets[unit.name] = unit
         else:
             target = unit
+    print(str(len(potential_targets)))
     # elif unit is Unit:
     #     boids[unit.name] = unit
     # else:
@@ -110,7 +111,7 @@ func reset_target(get_new: bool) -> bool:
     if not get_new:
         return false
 
-    var min_dist := vision_radius + 1
+    var min_dist := stats.vision_radius + 1
     for n in potential_targets.keys():
         if !is_instance_valid(potential_targets[n]):
             potential_targets.erase(n)
@@ -143,8 +144,8 @@ func get_target_distance() -> float:
     return (target.global_position - global_position).length()
 
 func verify_target(get_new_if_false: bool) -> bool:
-    if target == null:
-        return false
+    # if target == null:
+    #     return false
     if !is_instance_valid(target):
         return reset_target(get_new_if_false)
     return true
@@ -154,7 +155,7 @@ func ai_target(delta) -> void:
         return
     # Aim at target
     target_angle = (target.global_position - global_position).angle()
-    if not primary_ready or Utils.angle_distance(rotation, target_angle) > rotation_speed * delta:
+    if not primary_ready or Utils.angle_distance(rotation, target_angle) > stats.rotation_speed * delta:
         return
     shoot(primary)
     primary_ready = false
@@ -257,12 +258,12 @@ func _physics_process(_delta):
     # update_target_velocity(_delta)
 
     if target_velocity.length() > 0:
-        velocity = Utils.approach_vector(velocity, target_velocity, acceleration)
+        velocity = Utils.approach_vector(velocity, target_velocity, stats.acceleration)
     else:
         velocity = Utils.approach_vector(velocity, target_velocity, FRICTION * _delta)
 
     # ai_target(_delta)
-    rotation = Utils.approach_angle(rotation, target_angle, rotation_speed * _delta)
+    rotation = Utils.approach_angle(rotation, target_angle, stats.rotation_speed * _delta)
     # var collision := move_and_collide(velocity * _delta)
     # if collision:
     #     var collision_vector : Vector2 = collision.get_collider().global_position - global_position

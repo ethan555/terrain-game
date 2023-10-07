@@ -75,8 +75,12 @@ func create_spawn_area(index: int):
     controller.set_selected(inst, false, true)
 
 func add_spawning_area(index: int):
-    if index >= len(spawn_areas):
+    if index >= len(build_actions):
         return
+    var action := build_actions[index]
+    if not action.attempt(controller, faction):
+        return
+    # Successfully paid
     create_spawn_area(index)
 
 func _on_select_click():

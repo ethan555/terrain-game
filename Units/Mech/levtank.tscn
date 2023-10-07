@@ -21,7 +21,6 @@ resource_local_to_scene = true
 [node name="Levtank" instance=ExtResource("1_7jt5f")]
 primary = ExtResource("2_7l3fm")
 primary_offset = Vector2(5, 0)
-move_speed = 160.0
 mass = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
@@ -41,6 +40,7 @@ texture = ExtResource("3_7jqtc")
 _HEALTH = 100.0
 _ARMOR = 1.0
 _SPEED = 160.0
+_VISION_RADIUS = 150.0
 
 [node name="Boid" parent="." index="6"]
 radius = 12.0

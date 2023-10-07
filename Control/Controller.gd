@@ -16,13 +16,14 @@ enum State {
     State.Destroying: -1.0
 }
 
-@onready var ui := get_node("/root/Level/UI")
+@onready var ui : UI = get_node("/root/Level/UI")
 @onready var timer : Timer = $Timer
 
 var current_state = State.Building
 
 # var energy := 3
-var starting_faction_resources : Array[FactionResources]
+@export var starting_faction_resources : Array[FactionResources]
+var player_faction : String
 var faction_resources : Dictionary = {}
 
 var selected_stack : Array[Node2D] = []
@@ -32,8 +33,11 @@ signal next_round_signal
 signal terrain_click
 
 func init_faction_resources():
+    # Player will be the first faction
+    player_faction = starting_faction_resources[0].faction.faction_name
     for sfr in starting_faction_resources:
-        faction_resources[sfr.faction.name] = sfr
+        faction_resources[sfr.faction.faction_name] = sfr
+    ui.init_player_faction(faction_resources[player_faction])
 
 func _ready():
     timer.connect("timeout", round_timeout)
@@ -51,7 +55,8 @@ func round_timeout():
             current_state = State.Play
             var spawning_round : bool = round_counter % 3 == 0
             next_round_signal.emit(round_counter, spawning_round)
-            ui.get_node("RoundLabel").text = "Round " + str(round_counter + 1)
+            ui.update_round_label(round_counter + 1)
+            # ui.get_node("RoundLabel").text = "Round " + str(round_counter + 1)
             round_counter += 1
     timer.start(round_timeouts[current_state])
 
@@ -118,6 +123,24 @@ func on_right_click(_event):
     else:
         terrain_click.emit()
 
+## Attempt to pay the cost of an action from the `faction`.
+## If successful, the `cost` is paid and return `true`
+## If unsuccessful, the `cost` is not paid, and return `false`
+func attempt_cost(cost, faction: Faction) -> bool:
+    if faction.faction_name not in faction_resources:
+        push_error("Invalid faction: " + faction.faction_name)
+        return false
+    # If faction can afford, pay the cost
+    var faction_resource : FactionResources = faction_resources[faction.faction_name]
+    if faction_resource.energy >= cost:
+        faction_resource.energy -= cost
+        # faction_resources[faction.faction_name] -= cost
+        if faction.faction_name == player_faction:
+            ui.update_player_faction(faction_resource)
+            # ui.update_player_faction(faction_resources[faction.faction_name])
+        return true
+    return false
+
 func _input(event):
     if event.is_action_pressed("end_turn"):
         if current_state == State.Building:
@@ -143,7 +166,8 @@ func _process(delta):
             build(delta)
         State.Destroying:
             pass
-    ui.get_node("ControlTimer").text = str(ceil(timer.time_left))
+    # ui.get_node("ControlTimer").text = str(ceil(timer.time_left))
+    ui.update_control_timer(ceil(timer.time_left))
 
 func play(delta):
     pass

@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://bxy7srwvrofs8"]
+
+[ext_resource type="PackedScene" uid="uid://tcynejlyen4i" path="res://Buildings/spawn_area.tscn" id="1_7cffh"]
+[ext_resource type="PackedScene" uid="uid://dl7w4uuif7bsv" path="res://Units/Mech/levtank.tscn" id="2_56m8j"]
+[ext_resource type="Texture2D" uid="uid://8x65l7nwj2pi" path="res://Assets/Units/levtank/levtank_body.png" id="3_0tj6n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5w3c3"]
+resource_local_to_scene = true
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iv3ts"]
+resource_local_to_scene = true
+
+[node name="SpawnInfantry" instance=ExtResource("1_7cffh")]
+unit_rows = 2
+unit_columns = 2
+unit_scene = ExtResource("2_56m8j")
+unit_texture = ExtResource("3_0tj6n")
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("RectangleShape2D_5w3c3")
+
+[node name="CollisionShape2D" parent="SelectBox" index="1"]
+shape = SubResource("RectangleShape2D_iv3ts")

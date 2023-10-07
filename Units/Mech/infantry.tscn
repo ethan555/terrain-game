@@ -32,6 +32,9 @@ shape = SubResource("CircleShape2D_c484b")
 shape = SubResource("CircleShape2D_1eg3w")
 debug_color = Color(0, 0.6, 0.701961, 0.0196078)
 
+[node name="Stats" parent="." index="4"]
+_SPEED = 50.0
+
 [node name="Boid" parent="." index="6"]
 radius = 8.0
 

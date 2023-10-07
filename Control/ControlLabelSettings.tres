@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://c3wodmvh706v8"]
+
+[ext_resource type="SystemFont" uid="uid://b2s55y78f8077" path="res://Terrain/terrain.tres" id="1_cjge4"]
+
+[resource]
+resource_local_to_scene = true
+font = ExtResource("1_cjge4")
+font_size = 24

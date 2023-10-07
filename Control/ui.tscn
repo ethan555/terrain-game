@@ -1,26 +1,37 @@
-[gd_scene load_steps=4 format=3 uid="uid://bjvh7sb02ldwp"]
+[gd_scene load_steps=3 format=3 uid="uid://bjvh7sb02ldwp"]
 
-[ext_resource type="SystemFont" uid="uid://b2s55y78f8077" path="res://Terrain/terrain.tres" id="1_d4nmv"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_h5ti1"]
-font = ExtResource("1_d4nmv")
-font_size = 24
-
-[sub_resource type="LabelSettings" id="LabelSettings_xyy50"]
-font = ExtResource("1_d4nmv")
-font_size = 24
+[ext_resource type="Script" path="res://Control/UI.gd" id="1_rgglh"]
+[ext_resource type="LabelSettings" uid="uid://c3wodmvh706v8" path="res://Control/ControlLabelSettings.tres" id="3_leosx"]
 
 [node name="UI" type="CanvasLayer"]
+script = ExtResource("1_rgglh")
 
 [node name="ControlTimer" type="Label" parent="."]
 offset_top = 36.0
 offset_right = 27.0
 offset_bottom = 75.0
 text = "0"
-label_settings = SubResource("LabelSettings_h5ti1")
+label_settings = ExtResource("3_leosx")
 
 [node name="RoundLabel" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Round 1"
-label_settings = SubResource("LabelSettings_xyy50")
+label_settings = ExtResource("3_leosx")
+
+[node name="PlayerFactionName" type="Label" parent="."]
+offset_left = 1515.0
+offset_right = 1600.0
+offset_bottom = 37.0
+text = "Faction"
+label_settings = ExtResource("3_leosx")
+horizontal_alignment = 2
+
+[node name="PlayerFactionResources" type="Label" parent="."]
+offset_left = 1526.0
+offset_top = 37.0
+offset_right = 1600.0
+offset_bottom = 74.0
+text = "0"
+label_settings = ExtResource("3_leosx")
+horizontal_alignment = 2

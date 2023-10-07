@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Faction" load_steps=2 format=3 uid="uid://cuvur75tq2w05"]
+
+[ext_resource type="Script" path="res://Units/Faction.gd" id="1_tlstf"]
+
+[resource]
+script = ExtResource("1_tlstf")
+id = 0
+faction_name = "DIS"
+color = Color(0, 0.282353, 1, 1)
+allies = Array[String]([])

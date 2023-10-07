@@ -27,6 +27,7 @@ collision_layer = 0
 texture = ExtResource("2_5tmj6")
 
 [node name="Stats" parent="." instance=ExtResource("3_6f5mt")]
+_SPEED = 50.0
 
 [node name="PrimaryTimer" type="Timer" parent="."]
 

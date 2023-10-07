@@ -25,7 +25,6 @@ resource_local_to_scene = true
 
 [node name="Infantry" instance=ExtResource("1_gd6mp")]
 primary_time = 0.5
-move_speed = 50.0
 mass = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
@@ -44,6 +43,7 @@ texture = ExtResource("2_xfugb")
 [node name="Stats" parent="." index="4"]
 _HEALTH = 30.0
 _ARMOR = 1.0
+_SPEED = 50.0
 
 [node name="AuraCommand" type="Area2D" parent="." index="6"]
 collision_layer = 2

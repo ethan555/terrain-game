@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://i7vo7t75bwx5"]
+
+[ext_resource type="PackedScene" uid="uid://tcynejlyen4i" path="res://Buildings/spawn_area.tscn" id="1_1t2ja"]
+[ext_resource type="PackedScene" uid="uid://ctnx3asmiv0xs" path="res://Buildings/Mech/factory.tscn" id="2_q078i"]
+[ext_resource type="Texture2D" uid="uid://jj42gpdwgqs8" path="res://icon.svg" id="3_6o5ha"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5w3c3"]
+resource_local_to_scene = true
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iv3ts"]
+resource_local_to_scene = true
+
+[node name="SpawnInfantry" instance=ExtResource("1_1t2ja")]
+charges = 1
+unit_scene = ExtResource("2_q078i")
+unit_texture = ExtResource("3_6o5ha")
+unit_scale = 2
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("RectangleShape2D_5w3c3")
+
+[node name="CollisionShape2D" parent="SelectBox" index="1"]
+shape = SubResource("RectangleShape2D_iv3ts")

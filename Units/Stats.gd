@@ -6,6 +6,10 @@ extends Node
 @export var _HEALTH := 10.0
 @export var _ARMOR := 0.0
 @export var _SPEED : float = 100
+@export var _ACCELERATION : float = 100
+@export var _ROTATION_SPEED : float = 2 * PI
+
+@export var _VISION_RADIUS : float = 140
 
 var statuses : Dictionary
 var status_effects : Dictionary
@@ -16,7 +20,11 @@ var max_health : float
 var health : float
 var armor : float
 var speed : float
+var rotation_speed : float = 2 * PI
+var acceleration : float = 100
 var attack_multiplier := 1.0
+
+var vision_radius : float = 140
 
 class ActiveStatus:
     var name : String
@@ -46,6 +54,10 @@ func _ready():
     health = _HEALTH
     armor = _ARMOR
     speed = _SPEED
+
+    rotation_speed = _ROTATION_SPEED
+    acceleration = _ACCELERATION
+    vision_radius = _VISION_RADIUS
 
 func damage(attack : Attack, delta := 1.0):
     health -= attack.get_damage(armor) * delta

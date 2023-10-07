@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c8k133bralrsw"]
+[gd_scene load_steps=19 format=3 uid="uid://c8k133bralrsw"]
 
 [ext_resource type="PackedScene" uid="uid://clfiyqkditp61" path="res://Terrain/terrain.tscn" id="1_ilss8"]
 [ext_resource type="PackedScene" uid="uid://lkjk0j866lfj" path="res://Control/Camera.tscn" id="2_xcmds"]
@@ -7,10 +7,23 @@
 [ext_resource type="Script" path="res://Units/Faction.gd" id="4_6bcgg"]
 [ext_resource type="PackedScene" uid="uid://dl7w4uuif7bsv" path="res://Units/Mech/levtank.tscn" id="4_6ybn6"]
 [ext_resource type="PackedScene" uid="uid://bllpl8v71bihn" path="res://Control/wall.tscn" id="4_oe0rq"]
+[ext_resource type="Resource" uid="uid://cuvur75tq2w05" path="res://Control/Factions/dis_faction.tres" id="5_rf428"]
+[ext_resource type="Resource" uid="uid://dfkwra04u4qfv" path="res://Control/Factions/seekers_faction.tres" id="6_uvyhj"]
+[ext_resource type="Script" path="res://Control/FactionResources.gd" id="7_b0x2f"]
 [ext_resource type="PackedScene" uid="uid://ctnx3asmiv0xs" path="res://Buildings/Mech/factory.tscn" id="9_gi1d6"]
 [ext_resource type="PackedScene" uid="uid://bblffax8bb1uc" path="res://Units/Mech/infantry.tscn" id="9_x37bf"]
 [ext_resource type="PackedScene" uid="uid://va1d0lu63qbu" path="res://Units/Mech/cannon.tscn" id="10_ahnt5"]
 [ext_resource type="PackedScene" uid="uid://bwe0xla2snj4f" path="res://Units/Mech/railgunner.tscn" id="11_cmdd2"]
+
+[sub_resource type="Resource" id="Resource_tjun6"]
+script = ExtResource("7_b0x2f")
+faction = ExtResource("5_rf428")
+energy = 5
+
+[sub_resource type="Resource" id="Resource_4ui41"]
+script = ExtResource("7_b0x2f")
+faction = ExtResource("6_uvyhj")
+energy = 5
 
 [sub_resource type="Resource" id="Resource_fya7a"]
 script = ExtResource("4_6bcgg")
@@ -35,6 +48,8 @@ allies = Array[String]([])
 [node name="UI" parent="." instance=ExtResource("3_lsrbq")]
 
 [node name="Controller" parent="." instance=ExtResource("3_km70m")]
+factions = Array[ExtResource("4_6bcgg")]([ExtResource("5_rf428"), ExtResource("6_uvyhj")])
+starting_faction_resources = Array[ExtResource("7_b0x2f")]([SubResource("Resource_tjun6"), SubResource("Resource_4ui41")])
 
 [node name="Wall" parent="." instance=ExtResource("4_oe0rq")]
 position = Vector2(-10, 2048)

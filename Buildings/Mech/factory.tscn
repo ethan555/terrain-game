@@ -1,10 +1,39 @@
-[gd_scene load_steps=8 format=3 uid="uid://ctnx3asmiv0xs"]
+[gd_scene load_steps=17 format=3 uid="uid://ctnx3asmiv0xs"]
 
 [ext_resource type="PackedScene" uid="uid://baaccbp77y6p8" path="res://Buildings/building.tscn" id="1_2ywug"]
+[ext_resource type="Texture2D" uid="uid://dedlg4gomgelg" path="res://Assets/Units/infantry/infantry_body.png" id="2_71838"]
 [ext_resource type="PackedScene" uid="uid://dx835s7g2fh6" path="res://Buildings/SpawnAreas/spawn_infantry.tscn" id="2_bw6nq"]
 [ext_resource type="PackedScene" uid="uid://dahmf2tr3o5bo" path="res://Buildings/SpawnAreas/spawn_cannon.tscn" id="3_ek5cb"]
+[ext_resource type="Script" path="res://Buildings/BuildAction.gd" id="3_op7l0"]
 [ext_resource type="PackedScene" uid="uid://c5l5btoolddsr" path="res://Buildings/SpawnAreas/spawn_railgunner.tscn" id="4_6x1nf"]
+[ext_resource type="Texture2D" uid="uid://b1iyucpgugrr2" path="res://Assets/Units/cannon/cannon_body.png" id="5_0qibv"]
 [ext_resource type="PackedScene" uid="uid://i0u0a630t1in" path="res://Buildings/SpawnAreas/spawn_officer.tscn" id="5_sd2k4"]
+[ext_resource type="Texture2D" uid="uid://dfmkk5126307s" path="res://Assets/Units/railgunner/railgunner_body.png" id="7_ncm5f"]
+[ext_resource type="Texture2D" uid="uid://sasnloj315gu" path="res://Assets/Units/officer/officer_body.png" id="9_fdg13"]
+
+[sub_resource type="Resource" id="Resource_ah453"]
+script = ExtResource("3_op7l0")
+cost = 2
+icon = ExtResource("2_71838")
+spawn_area = ExtResource("2_bw6nq")
+
+[sub_resource type="Resource" id="Resource_w7r84"]
+script = ExtResource("3_op7l0")
+cost = 2
+icon = ExtResource("5_0qibv")
+spawn_area = ExtResource("3_ek5cb")
+
+[sub_resource type="Resource" id="Resource_pi1ud"]
+script = ExtResource("3_op7l0")
+cost = 3
+icon = ExtResource("7_ncm5f")
+spawn_area = ExtResource("4_6x1nf")
+
+[sub_resource type="Resource" id="Resource_ml1q6"]
+script = ExtResource("3_op7l0")
+cost = 2
+icon = ExtResource("9_fdg13")
+spawn_area = ExtResource("5_sd2k4")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o5cxf"]
 radius = 16.0
@@ -13,6 +42,7 @@ radius = 16.0
 size = Vector2(32, 32)
 
 [node name="Factory" instance=ExtResource("1_2ywug")]
+build_actions = Array[ExtResource("3_op7l0")]([SubResource("Resource_ah453"), SubResource("Resource_w7r84"), SubResource("Resource_pi1ud"), SubResource("Resource_ml1q6")])
 spawn_areas = Array[PackedScene]([ExtResource("2_bw6nq"), ExtResource("3_ek5cb"), ExtResource("4_6x1nf"), ExtResource("5_sd2k4")])
 spawn_radius = 256.0
 

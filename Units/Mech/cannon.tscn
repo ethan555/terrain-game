@@ -23,7 +23,6 @@ resource_local_to_scene = true
 primary = ExtResource("2_nhcw1")
 primary_time = 2.0
 primary_offset = Vector2(2, -3)
-move_speed = 50.0
 mass = 5.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]

@@ -20,11 +20,9 @@ radius = 300.0
 resource_local_to_scene = true
 
 [node name="Railgunner" instance=ExtResource("1_tqlwo")]
-vision_radius = 300.0
 primary = ExtResource("2_xnv58")
 primary_time = 3.0
 primary_offset = Vector2(5, 2)
-move_speed = 50.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 shape = SubResource("CircleShape2D_g8gjg")
@@ -38,6 +36,9 @@ debug_color = Color(0, 0.6, 0.701961, 0.0196078)
 
 [node name="Sprite2D" parent="." index="3"]
 texture = ExtResource("3_mu73a")
+
+[node name="Stats" parent="." index="4"]
+_VISION_RADIUS = 300.0
 
 [node name="CollisionShape2D" parent="Boid" index="0"]
 shape = SubResource("CircleShape2D_v81ji")
